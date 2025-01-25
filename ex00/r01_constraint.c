@@ -6,7 +6,7 @@
 /*   By: towang <towang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 21:31:51 by towang            #+#    #+#             */
-/*   Updated: 2025/01/26 00:00:53 by towang           ###   ########.fr       */
+/*   Updated: 2025/01/26 00:14:18 by towang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,6 @@ void	r01_check_constraints(t_r01_puzzle *puzzle)
 	}
 }
 
-#include "r01_io.h"
-#include "stdio.h"
 int	r01_check_constr(t_r01_puzzle *puzzle, t_r01_constraint *constraint)
 {
 	int		constr_sub_idx;
@@ -54,14 +52,10 @@ int	r01_check_constr(t_r01_puzzle *puzzle, t_r01_constraint *constraint)
 		grid_idx = r01_get_grid_idx_for_constr(constraint, constr_sub_idx);
 		if (!r01_try_update_constr(puzzle->grid_vals[grid_idx], constraint))
 		{
-			// printf("violated constraint %d %d %d\n", constraint->idx, constraint->n_seen, constr_sub_idx);
-			// print_puzzle_grid(puzzle);
 			return (0);
 		}
 		if (r01_check_constr_violation(constraint, constr_sub_idx))
 		{
-			// printf("violated constraint %d %d %d\n", constraint->idx, constraint->n_seen, constr_sub_idx);
-			// print_puzzle_grid(puzzle);
 			return (0);
 		}
 		constr_sub_idx++;
