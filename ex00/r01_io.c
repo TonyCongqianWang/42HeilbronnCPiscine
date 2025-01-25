@@ -6,7 +6,7 @@
 /*   By: towang <towang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 11:55:36 by towang            #+#    #+#             */
-/*   Updated: 2025/01/25 19:05:22 by towang           ###   ########.fr       */
+/*   Updated: 2025/01/25 20:33:33 by towang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	get_puzzle_size_from_input(char *str)
 		return (0);
 	if (counter % 4 != 0)
 		return (0);
-	if (counter / 4 != 4)
+	if ((counter / 4) > 9 || (counter / 4) < 1)
 		return (0);
 	return (counter / 4);
 }
