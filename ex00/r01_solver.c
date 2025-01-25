@@ -6,9 +6,16 @@
 /*   By: towang <towang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 11:55:42 by towang            #+#    #+#             */
-/*   Updated: 2025/01/25 12:59:43 by towang           ###   ########.fr       */
+/*   Updated: 2025/01/25 15:25:11 by towang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include "r01_solver.h"
+
+t_r01_puzzle	olve_r01_puzzle(t_r01_puzzle puzzle)
+{
+	t_r01_puzzle	res;
+
+	return (res);
+}
