@@ -6,11 +6,12 @@
 /*   By: towang <towang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 11:55:42 by towang            #+#    #+#             */
-/*   Updated: 2025/01/25 18:33:29 by towang           ###   ########.fr       */
+/*   Updated: 2025/01/25 19:05:01 by towang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "r01_solver.h"
+#include "r01_io.h"
 
 t_r01_puzzle	r01_solve_puzzle(t_r01_puzzle *puzzle)
 {
@@ -22,6 +23,10 @@ t_r01_puzzle	r01_solve_puzzle(t_r01_puzzle *puzzle)
 	if (res.is_invalid || res.is_complete)
 		return (res);
 	grid_idx = r01_get_next_grid_idx(&res);
+	if (grid_idx < 0)
+	{
+		return (res);
+	}
 	grid_val = 1;
 	while (grid_val <= puzzle->size)
 	{
@@ -37,12 +42,12 @@ t_r01_puzzle	r01_solve_puzzle(t_r01_puzzle *puzzle)
 int	r01_get_next_grid_idx(t_r01_puzzle *puzzle)
 {
 	int		idx;
-
 	idx = 0;
 	while (idx < puzzle->size * puzzle->size)
 	{
 		if (puzzle->grid_vals[idx] == 0)
 			return (idx);
+		idx++;
 	}
 	return (-1);
 }

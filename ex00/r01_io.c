@@ -6,7 +6,7 @@
 /*   By: towang <towang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 11:55:36 by towang            #+#    #+#             */
-/*   Updated: 2025/01/25 17:36:33 by towang           ###   ########.fr       */
+/*   Updated: 2025/01/25 19:05:22 by towang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,13 @@ int	get_puzzle_size_from_input(char *str)
 			return (0);
 		else if (!space_expected && (*str < '1' || *str > '9'))
 			return (0);
+		else if (!space_expected)
+			counter++;
 		space_expected = !space_expected;
-		counter++;
+		str++;
 	}
+	if (!space_expected)
+		return (0);
 	if (counter % 4 != 0)
 		return (0);
 	if (counter / 4 != 4)
@@ -50,32 +54,30 @@ void	parse_input_str(t_r01_puzzle *puzzle, char *str)
 		val = str[2 * counter] - '0';
 		if (val > size)
 			puzzle->is_invalid = 1;
-		puzzle->grid_vals[counter] = val;
+		puzzle->constr_vals[counter] = val;
 		counter++;
 	}
 }
 
 void	print_puzzle_grid(t_r01_puzzle *puzzle)
 {
-	int		x;
-	int		y;
 	int		counter;
 	char	val;
 
-	x = 0;
-	y = 0;
 	counter = 0;
-	while (y < puzzle->size)
+	while (counter < puzzle->size * puzzle->size)
 	{
-		while (y < puzzle->size - 1)
-		{
-			val = '0' + puzzle->grid_vals[counter];
-			write(1, &val, 1);
-			write(1, " ", 1);
-		}
 		val = '0' + puzzle->grid_vals[counter];
 		write(1, &val, 1);
-		write(1, "\n", 1);
+		if (counter % puzzle->size != puzzle->size - 1)
+		{
+			write(1, " ", 1);
+		}
+		else
+		{
+			write(1, "\n", 1);
+		}
+		counter++;
 	}
 }
 

@@ -6,7 +6,7 @@
 /*   By: towang <towang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 11:55:53 by towang            #+#    #+#             */
-/*   Updated: 2025/01/25 18:33:22 by towang           ###   ########.fr       */
+/*   Updated: 2025/01/25 18:43:41 by towang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,13 @@ void	r01_initialize_puzzle(t_r01_puzzle *puzzle, int size)
 	while (idx < size * size)
 	{
 		puzzle->grid_vals[idx] = 0;
+		idx++;
 	}
 	idx = 0;
 	while (idx < 4 * size)
 	{
 		puzzle->constr_vals[idx] = 0;
+		idx++;
 	}
 }
 
@@ -75,6 +77,7 @@ void	r01_check_constr(t_r01_puzzle *puzzle, int constr_idx, int size)
 			max_val = puzzle->grid_vals[grid_idx];
 			actual_val++;
 		}
+		counter++;
 	}
 	puzzle->is_invalid = actual_val != constr_val;
 }
@@ -86,6 +89,7 @@ void	r01_set_grid_val(t_r01_puzzle *puzzle, int idx, int val)
 	while (idx < 4 * puzzle->size)
 	{
 		r01_check_constr(puzzle, idx, puzzle->size);
+		idx++;
 	}
 	idx = 0;
 	puzzle->is_complete = 1;
@@ -96,6 +100,7 @@ void	r01_set_grid_val(t_r01_puzzle *puzzle, int idx, int val)
 			puzzle->is_complete = 0;
 			return ;
 		}
+		idx++;
 	}
 }
 
