@@ -6,7 +6,7 @@
 /*   By: towang <towang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 11:51:38 by towang            #+#    #+#             */
-/*   Updated: 2025/01/25 18:22:00 by towang           ###   ########.fr       */
+/*   Updated: 2025/01/25 18:33:59 by towang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	main(int argc, char **argv)
 {
 	t_r01_puzzle		puzzle;
 
-	if (argc != 1)
+	if (argc != 2)
 	{
 		print_error();
 		return (0);
