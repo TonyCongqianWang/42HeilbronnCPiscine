@@ -6,7 +6,7 @@
 /*   By: towang <towang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 11:55:53 by towang            #+#    #+#             */
-/*   Updated: 2025/01/25 15:03:32 by towang           ###   ########.fr       */
+/*   Updated: 2025/01/25 17:40:29 by towang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,5 +23,9 @@ typedef struct s_r01_puzzle
 	int		constr_vals[R01_CONSTR_SIZE];
 	int		grid_vals[R01_GRID_SIZE];
 }				t_r01_puzzle;
+
+void	r01_initialize_puzzle(t_r01_puzzle *puzzle, int size);
+void	r01_set_grid_number(t_r01_puzzle *puzzle, int x, int y, int val);
+int		r01_get_grid_number(t_r01_puzzle *puzzle, int x, int y);
 
 #endif

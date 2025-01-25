@@ -6,27 +6,56 @@
 /*   By: towang <towang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 11:55:36 by towang            #+#    #+#             */
-/*   Updated: 2025/01/25 15:53:13 by towang           ###   ########.fr       */
+/*   Updated: 2025/01/25 17:36:33 by towang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 #include "r01_io.h"
 
-t_r01_puzzle	parse_input_str(char *str)
+int	get_puzzle_size_from_input(char *str)
 {
-	t_r01_puzzle	res;
-	int				space_expected;
+	int		space_expected;
+	int		counter;
 
-	space_expected = 0;	
-	while(*str)
+	counter = 0;
+	space_expected = 0;
+	while (*str)
 	{
-		
+		if (space_expected && *str != ' ')
+			return (0);
+		else if (!space_expected && (*str < '1' || *str > '9'))
+			return (0);
+		space_expected = !space_expected;
+		counter++;
 	}
-	return (res);
+	if (counter % 4 != 0)
+		return (0);
+	if (counter / 4 != 4)
+		return (0);
+	return (counter / 4);
 }
 
-void	print_puzzle_grid(t_r01_puzzle puzzle)
+void	parse_input_str(t_r01_puzzle *puzzle, char *str)
+{
+	int		size;
+	int		counter;
+	int		val;
+
+	size = get_puzzle_size_from_input(str);
+	r01_initialize_puzzle(puzzle, size);
+	counter = 0;
+	while (counter < 4 * size)
+	{
+		val = str[2 * counter] - '0';
+		if (val > size)
+			puzzle->is_invalid = 1;
+		puzzle->grid_vals[counter] = val;
+		counter++;
+	}
+}
+
+void	print_puzzle_grid(t_r01_puzzle *puzzle)
 {
 	int		x;
 	int		y;
@@ -36,15 +65,15 @@ void	print_puzzle_grid(t_r01_puzzle puzzle)
 	x = 0;
 	y = 0;
 	counter = 0;
-	while (y < puzzle.size)
+	while (y < puzzle->size)
 	{
-		while (y < puzzle.size - 1)
+		while (y < puzzle->size - 1)
 		{
-			val = '0' + puzzle.grid_vals[counter];
+			val = '0' + puzzle->grid_vals[counter];
 			write(1, &val, 1);
 			write(1, " ", 1);
 		}
-		val = '0' + puzzle.grid_vals[counter];
+		val = '0' + puzzle->grid_vals[counter];
 		write(1, &val, 1);
 		write(1, "\n", 1);
 	}

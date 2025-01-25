@@ -6,7 +6,7 @@
 /*   By: towang <towang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 11:55:39 by towang            #+#    #+#             */
-/*   Updated: 2025/01/25 15:52:13 by towang           ###   ########.fr       */
+/*   Updated: 2025/01/25 17:20:23 by towang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 
 # include "r01_puzzle.h"
 
-t_r01_puzzle	parse_input_str(char *str);
-void			print_puzzle_grid(t_r01_puzzle grid);
-void			print_error(void);
+void		parse_input_str(t_r01_puzzle *puzzle, char *str);
+void		print_puzzle_grid(t_r01_puzzle *grid);
+void		print_error(void);
 
 #endif
