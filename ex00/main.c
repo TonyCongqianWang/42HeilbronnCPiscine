@@ -6,7 +6,7 @@
 /*   By: towang <towang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 11:51:38 by towang            #+#    #+#             */
-/*   Updated: 2025/01/25 15:11:19 by towang           ###   ########.fr       */
+/*   Updated: 2025/01/25 15:23:03 by towang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,13 @@ int	main(int argc, char **argv)
 		print_error();
 		return (0);
 	}
-	else
+	puzzle = parse_input_str(argv[1]);
+	puzzle = solve_r01_puzzle(puzzle);
+	if(puzzle.is_invalid || !puzzle.is_complete)
 	{
-		puzzle = parse_input_str(argv[1]);
-		puzzle = solve_r01_puzzle(puzzle);
-		print_puzzle_grid(puzzle);
+		print_error();
+		return (0);
 	}
+	print_puzzle_grid(puzzle);
+	return (0);
 }
