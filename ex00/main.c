@@ -6,17 +6,17 @@
 /*   By: towang <towang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 11:51:38 by towang            #+#    #+#             */
-/*   Updated: 2025/01/25 12:57:41 by towang           ###   ########.fr       */
+/*   Updated: 2025/01/25 15:11:19 by towang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "r01_io.h"
 #include "r01_solver.h"
-#include "r01_grid.h"
+#include "r01_puzzle.h"
 
 int	main(int argc, char **argv)
 {
-	t_r01_grid		grid;
+	t_r01_puzzle		puzzle;
 
 	if (argc != 1)
 	{
@@ -30,8 +30,8 @@ int	main(int argc, char **argv)
 	}
 	else
 	{
-		grid = parse_input_str(argv[1]);
-		grid = solve_r01_grid(grid);
-		print_grid_or_error(grid);
+		puzzle = parse_input_str(argv[1]);
+		puzzle = solve_r01_puzzle(puzzle);
+		print_puzzle_grid(puzzle);
 	}
 }
