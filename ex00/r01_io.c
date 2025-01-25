@@ -6,22 +6,23 @@
 /*   By: towang <towang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 11:55:36 by towang            #+#    #+#             */
-/*   Updated: 2025/01/25 15:27:31 by towang           ###   ########.fr       */
+/*   Updated: 2025/01/25 15:53:13 by towang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 #include "r01_io.h"
 
-int	is_input_str_format_valid(char *str)
-{
-	return (0);
-}
-
 t_r01_puzzle	parse_input_str(char *str)
 {
 	t_r01_puzzle	res;
+	int				space_expected;
 
+	space_expected = 0;	
+	while(*str)
+	{
+		
+	}
 	return (res);
 }
 
