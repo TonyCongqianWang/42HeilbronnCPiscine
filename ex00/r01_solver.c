@@ -6,7 +6,7 @@
 /*   By: towang <towang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 11:55:42 by towang            #+#    #+#             */
-/*   Updated: 2025/01/25 22:33:39 by towang           ###   ########.fr       */
+/*   Updated: 2025/01/26 00:02:44 by towang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ t_r01_puzzle	r01_solve_puzzle(t_r01_puzzle *puzzle)
 	int				grid_idx;
 	int				grid_val;
 
-	print_puzzle_grid(puzzle); //TODO remove
 	res = *puzzle;
 	if (res.is_invalid || res.is_complete)
 		return (res);
@@ -58,7 +57,7 @@ int	r01_score_grid_idx(t_r01_puzzle *puzzle, int idx)
 		res = *puzzle;
 		grid_val++;
 	}
-	return 5 * (puzzle->size - num_valid) - puzzle->min_unset_count;
+	return (5 * (puzzle->size - num_valid) - puzzle->min_unset_count);
 }
 
 int	r01_get_next_grid_idx(t_r01_puzzle *puzzle)
@@ -70,7 +69,7 @@ int	r01_get_next_grid_idx(t_r01_puzzle *puzzle)
 
 	idx = 0;
 	best_idx = -1;
-	best_score = -1;
+	best_score = -2 * R01_MAX_GRID_SIZE;
 	while (idx < puzzle->size * puzzle->size)
 	{
 		if (puzzle->grid_vals[idx] == 0)
