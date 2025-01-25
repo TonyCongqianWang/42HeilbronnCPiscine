@@ -6,7 +6,7 @@
 /*   By: towang <towang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 11:55:53 by towang            #+#    #+#             */
-/*   Updated: 2025/01/25 18:20:03 by towang           ###   ########.fr       */
+/*   Updated: 2025/01/25 18:33:22 by towang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ int	r01_get_grid_idx_for_constr(int size, int constr_idx, int sub_idx)
 {
 	int		idx;
 
+	idx = -1;
 	if (constr_idx < size)
 		idx = constr_idx + sub_idx * size;
 	else if (constr_idx < 2 * size)

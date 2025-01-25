@@ -6,7 +6,7 @@
 /*   By: towang <towang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 11:55:42 by towang            #+#    #+#             */
-/*   Updated: 2025/01/25 18:32:04 by towang           ###   ########.fr       */
+/*   Updated: 2025/01/25 18:33:29 by towang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,5 +44,5 @@ int	r01_get_next_grid_idx(t_r01_puzzle *puzzle)
 		if (puzzle->grid_vals[idx] == 0)
 			return (idx);
 	}
-	return (0);
+	return (-1);
 }
