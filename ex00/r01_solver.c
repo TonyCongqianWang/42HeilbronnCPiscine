@@ -6,7 +6,7 @@
 /*   By: towang <towang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 11:55:42 by towang            #+#    #+#             */
-/*   Updated: 2025/01/25 19:05:01 by towang           ###   ########.fr       */
+/*   Updated: 2025/01/25 19:06:57 by towang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ t_r01_puzzle	r01_solve_puzzle(t_r01_puzzle *puzzle)
 	grid_val = 1;
 	while (grid_val <= puzzle->size)
 	{
-		r01_set_grid_val(puzzle, grid_idx, grid_val);
+		r01_set_grid_val(&puzzle, grid_idx, grid_val);
 		res = r01_solve_puzzle(&res);
 		if (!res.is_invalid && res.is_complete)
 			return (res);
