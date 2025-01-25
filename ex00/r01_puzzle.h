@@ -6,7 +6,7 @@
 /*   By: towang <towang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 11:55:53 by towang            #+#    #+#             */
-/*   Updated: 2025/01/25 18:24:18 by towang           ###   ########.fr       */
+/*   Updated: 2025/01/25 19:15:02 by towang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ typedef struct s_r01_puzzle
 
 void	r01_initialize_puzzle(t_r01_puzzle *puzzle, int size);
 void	r01_set_grid_val(t_r01_puzzle *puzzle, int idx, int val);
-int		r01_get_grid_val(t_r01_puzzle *puzzle, int x, int y);
 void	r01_check_constr(t_r01_puzzle *puzzle, int constr_idx, int size);
 int		r01_get_grid_idx_for_constr(int size, int constr_idx, int sub_idx);
 

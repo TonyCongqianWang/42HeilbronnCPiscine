@@ -6,7 +6,7 @@
 /*   By: towang <towang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 11:51:38 by towang            #+#    #+#             */
-/*   Updated: 2025/01/25 19:05:42 by towang           ###   ########.fr       */
+/*   Updated: 2025/01/25 19:08:55 by towang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ int	main(int argc, char **argv)
 	}
 	parse_input_str(&puzzle, argv[1]);
 	printf("Solving...\n");
-	print_puzzle_grid(&puzzle);
 	puzzle = r01_solve_puzzle(&puzzle);
 	if (puzzle.is_invalid || !puzzle.is_complete)
 	{

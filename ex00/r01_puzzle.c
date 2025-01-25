@@ -6,13 +6,14 @@
 /*   By: towang <towang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 11:55:53 by towang            #+#    #+#             */
-/*   Updated: 2025/01/25 18:43:41 by towang           ###   ########.fr       */
+/*   Updated: 2025/01/25 19:22:13 by towang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 // stdlib for malloc if we want to modify for bonus tasks
 // #include <stdlib.h>
 #include "r01_puzzle.h"
+#include <stdio.h> // dont forget
 
 void	r01_initialize_puzzle(t_r01_puzzle *puzzle, int size)
 {
@@ -46,9 +47,9 @@ int	r01_get_grid_idx_for_constr(int size, int constr_idx, int sub_idx)
 		idx = constr_idx + sub_idx * size;
 	else if (constr_idx < 2 * size)
 		idx = constr_idx + (size - sub_idx - 1) * size;
-	else if (constr_idx < 2 * size)
+	else if (constr_idx < 3 * size)
 		idx = constr_idx * size + sub_idx;
-	else if (constr_idx < 2 * size)
+	else if (constr_idx < 4 * size)
 		idx = (constr_idx + 1) * size - 1 - sub_idx;
 	return (idx);
 }
@@ -56,18 +57,19 @@ int	r01_get_grid_idx_for_constr(int size, int constr_idx, int sub_idx)
 void	r01_check_constr(t_r01_puzzle *puzzle, int constr_idx, int size)
 {
 	int		grid_idx;
-	int		counter;
+	int		sub_idx;
 	int		constr_val;
 	int		actual_val;
 	int		max_val;
 
-	counter = 0;
+	sub_idx = 0;
 	max_val = 0;
 	constr_val = puzzle->constr_vals[constr_idx];
 	actual_val = 0;
-	while (counter < size)
+	while (sub_idx < size)
 	{
-		grid_idx = r01_get_grid_idx_for_constr(size, constr_idx, counter);
+		grid_idx = r01_get_grid_idx_for_constr(size, constr_idx, sub_idx);
+		printf("%d %d\n", constr_idx, grid_idx);
 		if (puzzle->grid_vals[grid_idx] == 0)
 		{
 			return ;
@@ -77,9 +79,14 @@ void	r01_check_constr(t_r01_puzzle *puzzle, int constr_idx, int size)
 			max_val = puzzle->grid_vals[grid_idx];
 			actual_val++;
 		}
-		counter++;
+		sub_idx++;
 	}
 	puzzle->is_invalid = actual_val != constr_val;
+	if (puzzle->is_invalid)
+	{
+		printf("Constr violated: %d %d %d\n", constr_idx, constr_val, actual_val);
+		return ;
+	}
 }
 
 void	r01_set_grid_val(t_r01_puzzle *puzzle, int idx, int val)
@@ -89,6 +96,8 @@ void	r01_set_grid_val(t_r01_puzzle *puzzle, int idx, int val)
 	while (idx < 4 * puzzle->size)
 	{
 		r01_check_constr(puzzle, idx, puzzle->size);
+		if (puzzle->is_invalid)
+			return ;
 		idx++;
 	}
 	idx = 0;
@@ -102,12 +111,4 @@ void	r01_set_grid_val(t_r01_puzzle *puzzle, int idx, int val)
 		}
 		idx++;
 	}
-}
-
-int	r01_get_grid_val(t_r01_puzzle *puzzle, int x, int y)
-{
-	int		idx;
-
-	idx = x + puzzle->size * y;
-	return (puzzle->grid_vals[idx]);
 }
