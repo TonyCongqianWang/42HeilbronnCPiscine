@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   r01_constraint.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: towang <towang@student.42heilbronn.de>     +#+  +:+       +#+        */
+/*   By: towang <towang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 21:31:51 by towang            #+#    #+#             */
-/*   Updated: 2025/01/26 17:03:40 by towang           ###   ########.fr       */
+/*   Updated: 2025/01/26 22:32:16 by towang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,8 @@ int	r01_check_active_constr(t_r01_grid *puzzle)
 	while (sub_idx < size)
 	{
 		grid_idx = constr->constr_grid_map[constr_idx][sub_idx];
-		r01_update_constr(constr, sub_idx, puzzle->grid_vals[grid_idx]);
+		r01_insert_val(constr, puzzle->grid_vals[grid_idx]);
+		r01_update_constr(constr, sub_idx);
 		sub_idx++;
 		if (constr->cur_lb > constr->vals[constr_idx])
 			return (0);
@@ -88,7 +89,7 @@ void	r01_insert_val(t_r01_constraints *constr, int val)
 	}
 }
 
-void	r01_update_constr(t_r01_constraints *constr, int idx, int val)
+void	r01_update_constr(t_r01_constraints *constr, int idx)
 {
 	int		lhs_ub;
 	int		rhs_ub;
