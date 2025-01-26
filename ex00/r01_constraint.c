@@ -6,7 +6,7 @@
 /*   By: towang <towang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 21:31:51 by towang            #+#    #+#             */
-/*   Updated: 2025/01/26 02:17:13 by towang           ###   ########.fr       */
+/*   Updated: 2025/01/26 02:27:39 by towang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,9 @@ void	r01_check_constraints(t_r01_puzzle *puzzle)
 		constr->n_seen = 0;
 		constr->n_unset = 0;
 		puzzle->is_invalid = !r01_check_constr(puzzle, constr);
-		r01_update_min_unset(puzzle, puzzle->constraints[idx].n_unset);
 		if (puzzle->is_invalid)
 			return ;
+		r01_update_min_unset(puzzle, puzzle->constraints[idx].n_unset);
 		idx++;
 	}
 }
