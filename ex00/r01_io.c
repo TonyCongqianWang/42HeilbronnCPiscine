@@ -6,7 +6,7 @@
 /*   By: towang <towang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 11:55:36 by towang            #+#    #+#             */
-/*   Updated: 2025/01/26 12:57:05 by towang           ###   ########.fr       */
+/*   Updated: 2025/01/26 13:41:10 by towang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	r01_parse_input_size(char *str)
 	return (counter / 4);
 }
 
-void	r01_parse_input(t_r01_grid *grid, t_r01_constraints *constrs, char *str)
+void	r01_parse_input(t_r01_grid *grid, t_r01_constraints *cons, char *str)
 {
 	int		size;
 	int		counter;
@@ -48,14 +48,14 @@ void	r01_parse_input(t_r01_grid *grid, t_r01_constraints *constrs, char *str)
 
 	size = r01_parse_input_size(str);
 	
-	r01_init_puzzle(grid, constrs, size);
+	r01_init_puzzle(grid, cons, size);
 	counter = 0;
 	while (counter < 4 * size)
 	{
 		val = str[2 * counter] - '0';
 		if (val > size)
 			grid->is_invalid = 1;
-		constrs->vals[counter] = val;
+		cons->vals[counter] = val;
 		counter++;
 	}
 }
