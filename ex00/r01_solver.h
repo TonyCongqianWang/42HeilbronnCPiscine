@@ -6,7 +6,7 @@
 /*   By: towang <towang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 11:55:46 by towang            #+#    #+#             */
-/*   Updated: 2025/01/26 13:41:52 by towang           ###   ########.fr       */
+/*   Updated: 2025/01/26 14:39:59 by towang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,9 @@
 
 # include "r01_puzzle.h"
 
-t_r01_grid		r01_solve_puzzle(t_r01_grid *puzzle);
-int				r01_score_grid_idx(t_r01_grid *puzzle, int idx);
-int				r01_get_next_grid_idx(t_r01_grid *puzzle);
+t_r01_grid	r01_solve_puzzle(t_r01_grid *puzzle);
+t_r01_grid	r01_tree_search(t_r01_grid *puzzle, int depths, int score_depths);
+int			r01_score_grid_idx(t_r01_grid *puzzle, int idx, int score_depths);
+int			r01_get_next_grid_idx(t_r01_grid *puzzle, int score_depths);
 
 #endif
