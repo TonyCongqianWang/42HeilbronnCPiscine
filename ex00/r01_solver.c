@@ -6,7 +6,7 @@
 /*   By: towang <towang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 11:55:42 by towang            #+#    #+#             */
-/*   Updated: 2025/01/26 00:13:54 by towang           ###   ########.fr       */
+/*   Updated: 2025/01/26 01:48:34 by towang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,6 @@ t_r01_puzzle	r01_solve_puzzle(t_r01_puzzle *puzzle)
 	if (res.is_invalid || res.is_complete)
 		return (res);
 	grid_idx = r01_get_next_grid_idx(&res);
-	if (grid_idx < 0)
-	{
-		return (res);
-	}
 	grid_val = 1;
 	while (grid_val <= puzzle->size)
 	{
@@ -47,13 +43,18 @@ int	r01_score_grid_idx(t_r01_puzzle *puzzle, int idx)
 
 	res = *puzzle;
 	grid_val = 1;
-	num_valid = 1;
+	num_valid = 0;
 	while (grid_val <= puzzle->size)
 	{
-		r01_set_grid_val(&res, idx, grid_val);
-		if (!res.is_invalid)
-			num_valid++;
-		res = *puzzle;
+		if (puzzle->valid_values[idx] & (1 << grid_val))
+		{
+			r01_set_grid_val(&res, idx, grid_val);
+			if (res.is_invalid)
+				puzzle->valid_values[idx] &= ~(1 << grid_val);
+			else
+				num_valid++;
+			res = *puzzle;
+		}
 		grid_val++;
 	}
 	return (10 * puzzle->size - 3 * num_valid - puzzle->min_unset_count);

@@ -6,7 +6,7 @@
 /*   By: towang <towang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 21:31:51 by towang            #+#    #+#             */
-/*   Updated: 2025/01/26 00:14:18 by towang           ###   ########.fr       */
+/*   Updated: 2025/01/26 00:54:36 by towang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,6 @@ void	r01_check_constraints(t_r01_puzzle *puzzle)
 		constraint.n_seen = 0;
 		constraint.n_unset = 0;
 		sub_idx = 0;
-		while (sub_idx < puzzle->size)
-		{
-			constraint.present_vals[sub_idx] = 0;
-			sub_idx++;
-		}
 		puzzle->is_invalid = !r01_check_constr(puzzle, &constraint);
 		r01_update_min_unset(puzzle, constraint.n_unset);
 		if (puzzle->is_invalid)
@@ -50,10 +45,7 @@ int	r01_check_constr(t_r01_puzzle *puzzle, t_r01_constraint *constraint)
 	while (constr_sub_idx < constraint->size)
 	{
 		grid_idx = r01_get_grid_idx_for_constr(constraint, constr_sub_idx);
-		if (!r01_try_update_constr(puzzle->grid_vals[grid_idx], constraint))
-		{
-			return (0);
-		}
+		r01_try_update_constr(puzzle->grid_vals[grid_idx], constraint);
 		if (r01_check_constr_violation(constraint, constr_sub_idx))
 		{
 			return (0);
@@ -99,14 +91,8 @@ int	r01_check_constr_violation(t_r01_constraint *constr, int sub_idx)
 	return (0);
 }
 
-int	r01_try_update_constr(int val, t_r01_constraint *constr)
+void	r01_try_update_constr(int val, t_r01_constraint *constr)
 {
-	if (val > 0)
-	{
-		constr->present_vals[val - 1]++;
-		if (constr->present_vals[val - 1] > 1)
-			return (0);
-	}
 	if (val == 0)
 	{
 		constr->n_unset++;
@@ -116,5 +102,4 @@ int	r01_try_update_constr(int val, t_r01_constraint *constr)
 		constr->max_height = val;
 		constr->n_seen++;
 	}
-	return (1);
 }
