@@ -6,15 +6,15 @@
 /*   By: towang <towang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 11:55:42 by towang            #+#    #+#             */
-/*   Updated: 2025/01/26 15:10:43 by towang           ###   ########.fr       */
+/*   Updated: 2025/01/26 15:30:38 by towang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "r01_solver.h"
-#include "r01_io.h"
+
 t_r01_grid	r01_solve_puzzle(t_r01_grid *puzzle)
 {
-	return r01_tree_search(puzzle, -1, 0);
+	return (r01_tree_search(puzzle, -1, 0));
 }
 
 t_r01_grid	r01_tree_search(t_r01_grid *puzzle, int depths, int score_depths)
@@ -22,7 +22,7 @@ t_r01_grid	r01_tree_search(t_r01_grid *puzzle, int depths, int score_depths)
 	t_r01_grid		res;
 	int				grid_idx;
 	int				grid_val;
-	
+
 	if (puzzle->is_invalid || puzzle->is_complete || depths == 0)
 		return (*puzzle);
 	res = *puzzle;
@@ -40,7 +40,6 @@ t_r01_grid	r01_tree_search(t_r01_grid *puzzle, int depths, int score_depths)
 	res.is_invalid = 1;
 	return (res);
 }
-
 
 int	r01_score_grid_idx(t_r01_grid *puzzle, int idx, int score_depths)
 {
