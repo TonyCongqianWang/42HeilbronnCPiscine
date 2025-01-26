@@ -6,13 +6,12 @@
 /*   By: towang <towang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 11:55:53 by towang            #+#    #+#             */
-/*   Updated: 2025/01/26 13:01:54 by towang           ###   ########.fr       */
+/*   Updated: 2025/01/26 13:05:56 by towang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// stdlib for malloc if we want to modify for bonus tasks
-// #include <stdlib.h>
 #include "r01_puzzle.h"
+#include "r01_constraint.h"
 
 void	r01_init_puzzle(t_r01_grid *grid, t_r01_constraints *constrs, int size)
 {
@@ -23,6 +22,7 @@ void	r01_init_puzzle(t_r01_grid *grid, t_r01_constraints *constrs, int size)
 	grid->is_invalid = 0;
 	grid->min_unset_count = size;
 	grid->constraints = constrs;
+	grid->total_unset_count = size * size;
 	constrs->size = size;
 	if (size == 0)
 		grid->is_invalid = 0;
@@ -117,15 +117,7 @@ void	r01_set_grid_val(t_r01_grid *grid, int idx, int val)
 		return ;
 	}
 	r01_check_constraints(grid, idx);
-	idx = 0;
-	grid->is_complete = 1;
-	while (idx < grid->size * grid->size)
-	{
-		if (grid->grid_vals[idx] == 0)
-		{
-			grid->is_complete = 0;
-			return ;
-		}
-		idx++;
-	}
+	grid->total_unset_count--;
+	if (grid->total_unset_count == 0)
+		grid->is_complete = 1;
 }

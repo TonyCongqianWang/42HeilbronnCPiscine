@@ -6,7 +6,7 @@
 /*   By: towang <towang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 11:55:53 by towang            #+#    #+#             */
-/*   Updated: 2025/01/26 13:01:59 by towang           ###   ########.fr       */
+/*   Updated: 2025/01/26 13:03:03 by towang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ typedef struct s_r01_grid
 	int					is_complete;
 	int					is_invalid;
 	int					min_unset_count;
+	int					total_unset_count;
 	t_r01_constraints	*constraints;
 	char				grid_vals[R01_MAX_GRID_SIZE];
 	short				valid_values[R01_MAX_GRID_SIZE];
