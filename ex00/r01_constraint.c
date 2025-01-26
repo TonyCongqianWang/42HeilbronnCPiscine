@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   r01_constraint.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: towang <towang@student.42.fr>              +#+  +:+       +#+        */
+/*   By: towang <towang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 21:31:51 by towang            #+#    #+#             */
-/*   Updated: 2025/01/26 22:32:16 by towang           ###   ########.fr       */
+/*   Updated: 2025/01/26 23:18:46 by towang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	r01_check_constraints(t_r01_grid *puzzle, int insert_idx)
 			constr->cur_ub = constr->size + 1 - constr->last_lb;
 			puzzle->is_invalid = !r01_check_active_constr(puzzle);
 			constr->last_ub = constr->size + 1 - constr->cur_lb;
-			puzzle->is_invalid &= constr->last_ub < constr->vals[last_idx];
+			puzzle->is_invalid |= constr->last_ub < constr->vals[last_idx];
 		}
 		else
 			puzzle->is_invalid = !r01_check_active_constr(puzzle);
