@@ -6,7 +6,7 @@
 /*   By: towang <towang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 11:55:53 by towang            #+#    #+#             */
-/*   Updated: 2025/01/26 13:05:56 by towang           ###   ########.fr       */
+/*   Updated: 2025/01/26 16:19:02 by towang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ void	r01_init_maps(t_r01_constraints *constrs, int idx, int size)
 			grid_index = (idx % size) + (size - sub_index - 1) * size;
 		else if (idx < 3 * size)
 			grid_index = (idx % size) * size + sub_index;
-		else if (idx < size * size)
+		else if (idx < 4 * size)
 			grid_index = ((idx % size) + 1) * size - 1 - sub_index;
 		constrs->constr_grid_map[idx][sub_index] = grid_index;
 		g_to_cons_idx = 0;
@@ -87,14 +87,14 @@ int	r01_try_update_valid_values(t_r01_grid *grid, int idx, int val)
 	int		counter;
 	int		update_idx;
 
-	if (!((grid->valid_values[idx]) & (1 << val)))
+	if (!((grid->valid_values[idx]) & (1 << (val - 1))))
 		return (0);
 	counter = 0;
 	while (counter < grid->size)
 	{
 		update_idx = (idx + counter * grid->size);
 		update_idx %= grid->size * grid->size;
-		grid->valid_values[update_idx] &= ~(1 << val);
+		grid->valid_values[update_idx] &= ~(1 << (val - 1));
 		counter++;
 	}
 	counter = 0;
@@ -102,7 +102,7 @@ int	r01_try_update_valid_values(t_r01_grid *grid, int idx, int val)
 	{
 		update_idx = (idx / grid->size) * grid->size;
 		update_idx += ((idx + counter) % grid->size);
-		grid->valid_values[update_idx] &= ~(1 << val);
+		grid->valid_values[update_idx] &= ~(1 << (val - 1));
 		counter++;
 	}
 	return (1);

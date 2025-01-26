@@ -6,15 +6,15 @@
 /*   By: towang <towang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 11:55:53 by towang            #+#    #+#             */
-/*   Updated: 2025/01/26 15:15:08 by towang           ###   ########.fr       */
+/*   Updated: 2025/01/26 15:50:04 by towang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef R01_PUZZLE_H
 # define R01_PUZZLE_H
-# define R01_MAX_CONSTR_SIZE 36
-# define R01_MAX_GRID_SIZE 81
-# define R01_MAX_SIZE 9
+# define R01_MAX_CONSTR_SIZE 64
+# define R01_MAX_GRID_SIZE 256
+# define R01_MAX_SIZE 16
 # define R01_CONSTRS_PER_VAL 4
 
 typedef struct s_r01_constraints
