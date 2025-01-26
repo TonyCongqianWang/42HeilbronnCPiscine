@@ -6,7 +6,7 @@
 /*   By: towang <towang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 21:31:51 by towang            #+#    #+#             */
-/*   Updated: 2025/01/26 02:42:00 by towang           ###   ########.fr       */
+/*   Updated: 2025/01/26 02:56:42 by towang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ int	r01_check_violation(t_r01_constraint *constr, int sub_idx, int size)
 		return (1);
 	lhs_ub = constr->n_seen + constr->n_unset;
 	rhs_ub = size - constr->max_height;
-	if ( size - sub_idx - 1 < rhs_ub)
+	if (size - sub_idx - 1 < rhs_ub)
 		rhs_ub = size - sub_idx - 1;
 	if (lhs_ub + rhs_ub < constr->target_val)
 		return (1);
