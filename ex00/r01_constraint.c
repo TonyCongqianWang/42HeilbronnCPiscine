@@ -6,7 +6,7 @@
 /*   By: towang <towang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 21:31:51 by towang            #+#    #+#             */
-/*   Updated: 2025/01/26 15:30:13 by towang           ###   ########.fr       */
+/*   Updated: 2025/01/26 16:58:05 by towang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,7 @@ void	r01_update_constr(t_r01_constraints *constr, int idx, int val)
 {
 	int		lhs_ub;
 	int		rhs_ub;
+	int		new_lb;
 	int		constr_idx;
 	int		size;
 
@@ -93,10 +94,11 @@ void	r01_update_constr(t_r01_constraints *constr, int idx, int val)
 	}
 	size = constr->size;
 	constr_idx = constr->active_idx;
-	if (constr->n_unset == 0 && constr->n_seen > constr->cur_lb)
-	{
-		constr->cur_lb = constr->n_seen;
-	}
+	new_lb = constr->n_seen > constr->cur_lb;
+	if (constr->max_height < size)
+		new_lb += 1;
+	if (constr->n_unset == 0 && new_lb > constr->cur_lb)
+		constr->cur_lb = new_lb;
 	lhs_ub = constr->n_seen + constr->n_unset;
 	rhs_ub = size - constr->max_height;
 	if (size - idx - 1 < rhs_ub)
