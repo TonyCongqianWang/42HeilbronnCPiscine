@@ -6,7 +6,7 @@
 /*   By: towang <towang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 11:55:53 by towang            #+#    #+#             */
-/*   Updated: 2025/01/26 02:42:05 by towang           ###   ########.fr       */
+/*   Updated: 2025/01/26 12:27:42 by towang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include "r01_puzzle.h"
 #include "r01_constraint.h"
 
-void	r01_initialize_puzzle(t_r01_puzzle *puzzle, int size)
+void	r01_initialize_puzzle(t_r01_grid *puzzle, int size)
 {
 	int		idx;
 
@@ -35,12 +35,12 @@ void	r01_initialize_puzzle(t_r01_puzzle *puzzle, int size)
 	idx = 0;
 	while (idx < 4 * size)
 	{
-		init_constr_indeces(&(puzzle->constraints[idx]), idx, size);
+		init_constr_indeces(puzzle->constraints, idx, size);
 		idx++;
 	}
 }
 
-void	init_constr_indeces(t_r01_constraint *constraint, int idx, int size)
+void	init_constr_indeces(t_r01_constraints *constraints, int idx, int size)
 {
 	int		sub_index;
 	int		grid_index;
@@ -57,12 +57,13 @@ void	init_constr_indeces(t_r01_constraint *constraint, int idx, int size)
 			grid_index = (idx % size) * size + sub_index;
 		else if (idx < size * size)
 			grid_index = ((idx % size) + 1) * size - 1 - sub_index;
-		constraint->grid_indeces[sub_index] = grid_index;
+		constraints->constr_grid_map[idx][sub_index] = grid_index;
+		constraints->grid_constr_map[grid_index][sub_index] = idx;
 		sub_index++;
 	}
 }
 
-void	r01_update_min_unset(t_r01_puzzle *puzzle, int unset_count)
+void	r01_update_min_unset(t_r01_grid *puzzle, int unset_count)
 {
 	if (puzzle->min_unset_count > unset_count)
 	{
@@ -70,7 +71,7 @@ void	r01_update_min_unset(t_r01_puzzle *puzzle, int unset_count)
 	}
 }
 
-int	r01_try_update_valid_values(t_r01_puzzle *puzzle, int idx, int val)
+int	r01_try_update_valid_values(t_r01_grid *puzzle, int idx, int val)
 {
 	int		counter;
 	int		update_idx;
@@ -96,7 +97,7 @@ int	r01_try_update_valid_values(t_r01_puzzle *puzzle, int idx, int val)
 	return (1);
 }
 
-void	r01_set_grid_val(t_r01_puzzle *puzzle, int idx, int val)
+void	r01_set_grid_val(t_r01_grid *puzzle, int idx, int val)
 {
 	puzzle->grid_vals[idx] = val;
 	if (!r01_try_update_valid_values(puzzle, idx, val))

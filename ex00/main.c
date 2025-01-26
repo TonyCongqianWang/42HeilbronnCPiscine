@@ -6,7 +6,7 @@
 /*   By: towang <towang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 11:51:38 by towang            #+#    #+#             */
-/*   Updated: 2025/01/25 20:25:28 by towang           ###   ########.fr       */
+/*   Updated: 2025/01/26 12:18:25 by towang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,20 +16,21 @@
 
 int	main(int argc, char **argv)
 {
-	t_r01_puzzle		puzzle;
+	t_r01_grid			puzzle_grid;
+	t_r01_constraints	puzzle_constraints;
 
 	if (argc != 2)
 	{
-		print_error();
+		r01_print_error();
 		return (0);
 	}
-	parse_input_str(&puzzle, argv[1]);
-	puzzle = r01_solve_puzzle(&puzzle);
-	if (puzzle.is_invalid || !puzzle.is_complete)
+	r01_parse_input(&puzzle_grid, &puzzle_constraints, argv[1]);
+	puzzle_grid = r01_solve_puzzle(&puzzle_grid);
+	if (puzzle_grid.is_invalid || !puzzle_grid.is_complete)
 	{
-		print_error();
+		r01_print_error();
 		return (0);
 	}
-	print_puzzle_grid(&puzzle);
+	r01_print_grid(&puzzle_grid);
 	return (0);
 }

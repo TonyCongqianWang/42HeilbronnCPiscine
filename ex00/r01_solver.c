@@ -6,18 +6,18 @@
 /*   By: towang <towang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 11:55:42 by towang            #+#    #+#             */
-/*   Updated: 2025/01/26 01:48:34 by towang           ###   ########.fr       */
+/*   Updated: 2025/01/26 12:16:57 by towang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "r01_solver.h"
-
-t_r01_puzzle	r01_solve_puzzle(t_r01_puzzle *puzzle)
+#include "r01_io.h"
+t_r01_grid	r01_solve_puzzle(t_r01_grid *puzzle)
 {
-	t_r01_puzzle	res;
+	t_r01_grid		res;
 	int				grid_idx;
 	int				grid_val;
-
+	r01_print_grid(puzzle);
 	res = *puzzle;
 	if (res.is_invalid || res.is_complete)
 		return (res);
@@ -35,9 +35,9 @@ t_r01_puzzle	r01_solve_puzzle(t_r01_puzzle *puzzle)
 	return (res);
 }
 
-int	r01_score_grid_idx(t_r01_puzzle *puzzle, int idx)
+int	r01_score_grid_idx(t_r01_grid *puzzle, int idx)
 {
-	t_r01_puzzle	res;
+	t_r01_grid		res;
 	int				grid_val;
 	int				num_valid;
 
@@ -60,7 +60,7 @@ int	r01_score_grid_idx(t_r01_puzzle *puzzle, int idx)
 	return (10 * puzzle->size - 3 * num_valid - puzzle->min_unset_count);
 }
 
-int	r01_get_next_grid_idx(t_r01_puzzle *puzzle)
+int	r01_get_next_grid_idx(t_r01_grid *puzzle)
 {
 	int		idx;
 	int		score;

@@ -6,14 +6,14 @@
 /*   By: towang <towang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 11:55:36 by towang            #+#    #+#             */
-/*   Updated: 2025/01/26 02:24:29 by towang           ###   ########.fr       */
+/*   Updated: 2025/01/26 12:24:59 by towang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 #include "r01_io.h"
 
-int	get_puzzle_size_from_input(char *str)
+int	r01_parse_input_size(char *str)
 {
 	int		space_expected;
 	int		counter;
@@ -40,36 +40,38 @@ int	get_puzzle_size_from_input(char *str)
 	return (counter / 4);
 }
 
-void	parse_input_str(t_r01_puzzle *puzzle, char *str)
+void	r01_parse_input(t_r01_grid *grid, t_r01_constraints *constrs, char *str)
 {
 	int		size;
 	int		counter;
 	int		val;
 
-	size = get_puzzle_size_from_input(str);
-	r01_initialize_puzzle(puzzle, size);
+	size = r01_parse_input_size(str);
+	grid->constraints = constrs;
+	constrs->size = size;
+	r01_initialize_puzzle(grid, size);
 	counter = 0;
 	while (counter < 4 * size)
 	{
 		val = str[2 * counter] - '0';
 		if (val > size)
-			puzzle->is_invalid = 1;
-		puzzle->constraints[counter].target_val = val;
+			grid->is_invalid = 1;
+		constrs->vals[counter] = val;
 		counter++;
 	}
 }
 
-void	print_puzzle_grid(t_r01_puzzle *puzzle)
+void	r01_print_grid(t_r01_grid *grid)
 {
 	int		counter;
 	char	val;
 
 	counter = 0;
-	while (counter < puzzle->size * puzzle->size)
+	while (counter < grid->size * grid->size)
 	{
-		val = '0' + puzzle->grid_vals[counter];
+		val = '0' + grid->grid_vals[counter];
 		write(1, &val, 1);
-		if (counter % puzzle->size != puzzle->size - 1)
+		if (counter % grid->size != grid->size - 1)
 		{
 			write(1, " ", 1);
 		}
@@ -81,7 +83,7 @@ void	print_puzzle_grid(t_r01_puzzle *puzzle)
 	}
 }
 
-void	print_error(void)
+void	r01_print_error(void)
 {
 	write(1, "Error\n", 6);
 }
