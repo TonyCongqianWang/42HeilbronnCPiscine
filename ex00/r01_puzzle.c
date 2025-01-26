@@ -6,7 +6,7 @@
 /*   By: towang <towang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 11:55:53 by towang            #+#    #+#             */
-/*   Updated: 2025/01/26 13:05:56 by towang           ###   ########.fr       */
+/*   Updated: 2025/01/26 16:51:16 by towang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ void	r01_init_maps(t_r01_constraints *constrs, int idx, int size)
 			grid_index = (idx % size) + (size - sub_index - 1) * size;
 		else if (idx < 3 * size)
 			grid_index = (idx % size) * size + sub_index;
-		else if (idx < size * size)
+		else if (idx < 4 * size)
 			grid_index = ((idx % size) + 1) * size - 1 - sub_index;
 		constrs->constr_grid_map[idx][sub_index] = grid_index;
 		g_to_cons_idx = 0;
