@@ -6,7 +6,7 @@
 /*   By: towang <towang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 21:31:51 by towang            #+#    #+#             */
-/*   Updated: 2025/01/26 13:42:01 by towang           ###   ########.fr       */
+/*   Updated: 2025/01/26 14:14:26 by towang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,27 +14,48 @@
 
 void	r01_check_constraints(t_r01_grid *puzzle, int insert_idx)
 {
-	int					constr_idx;
+	int					rel_idx;
+	int					abs_idx;
+	int					last_idx;
+	int					complement_bound;
 	t_r01_constraints	*constr;
 
-	constr_idx = 0;
+	rel_idx = 0;
 	constr = puzzle->constraints;
-	while (constr_idx < 4)
+	while (rel_idx < 4)
 	{
-		constr->max_height = 0;
-		constr->n_seen = 0;
-		constr->n_unset = 0;
-		constr->cur_lb = 0;
-		constr->cur_ub = constr->size;
-		constr->active_idx = constr->grid_constr_map[insert_idx][constr_idx];
-		puzzle->is_invalid = !r01_check_active_constr(puzzle);
+		last_idx = abs_idx;
+		abs_idx = constr->grid_constr_map[insert_idx][rel_idx];
+		r01_set_active_constraint(constr, abs_idx);
+		if (rel_idx % 2 == 1)
+		{
+			constr->cur_ub = constr->size + 1 - constr->last_lb;
+			puzzle->is_invalid = !r01_check_active_constr(puzzle);
+			complement_bound = constr->size + 1 - constr->cur_lb;
+			puzzle->is_invalid &= complement_bound < constr->vals[last_idx];
+		}
+		else
+			puzzle->is_invalid = !r01_check_active_constr(puzzle);		
 		if (puzzle->is_invalid)
 			return ;
 		if (puzzle->min_unset_count > constr->n_unset)
 			puzzle->min_unset_count = constr->n_unset;
-		constr_idx++;
+		rel_idx++;
 	}
 }
+
+void	r01_set_active_constraint(t_r01_constraints *constr, int constr_idx)
+{
+	constr->max_height = 0;
+	constr->n_seen = 0;
+	constr->n_unset = 0;
+	constr->last_lb = constr->cur_lb;
+	constr->last_ub = constr->cur_ub;
+	constr->cur_lb = 0;
+	constr->cur_ub = constr->size;
+	constr->active_idx = constr_idx;
+}
+
 
 int	r01_check_active_constr(t_r01_grid *puzzle)
 {

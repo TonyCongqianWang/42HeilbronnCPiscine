@@ -6,7 +6,7 @@
 /*   By: towang <towang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 11:55:53 by towang            #+#    #+#             */
-/*   Updated: 2025/01/26 13:16:56 by towang           ###   ########.fr       */
+/*   Updated: 2025/01/26 13:54:53 by towang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ typedef struct s_r01_constraints
 	int				active_idx;
 	int				cur_lb;	
 	int				cur_ub;
+	int				last_lb;	
+	int				last_ub;
 	int				max_height;
 	int				n_seen;
 	int				n_unset;
