@@ -6,7 +6,7 @@
 /*   By: towang <towang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 21:31:51 by towang            #+#    #+#             */
-/*   Updated: 2025/01/26 02:27:39 by towang           ###   ########.fr       */
+/*   Updated: 2025/01/26 02:42:00 by towang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@ void	r01_check_constraints(t_r01_puzzle *puzzle)
 	t_r01_constraint	*constr;
 
 	idx = 0;
-	constr = &(puzzle->constraints[idx]);
 	while (idx < 4 * puzzle->size)
 	{
+		constr = &(puzzle->constraints[idx]);
 		constr->max_height = 0;
 		constr->n_seen = 0;
 		constr->n_unset = 0;
@@ -36,13 +36,15 @@ int	r01_check_constr(t_r01_puzzle *puzzle, t_r01_constraint *constraint)
 {
 	int		constr_sub_idx;
 	int		grid_idx;
+	int		size;
 
+	size = puzzle->size;
 	constr_sub_idx = 0;
-	while (constr_sub_idx < constraint->size)
+	while (constr_sub_idx < size)
 	{
 		grid_idx = constraint->grid_indeces[constr_sub_idx];
 		r01_try_update_constr(puzzle->grid_vals[grid_idx], constraint);
-		if (r01_check_constr_violation(constraint, constr_sub_idx))
+		if (r01_check_violation(constraint, constr_sub_idx, size))
 		{
 			return (0);
 		}
@@ -51,7 +53,7 @@ int	r01_check_constr(t_r01_puzzle *puzzle, t_r01_constraint *constraint)
 	return (constraint->n_seen + constraint->n_unset >= constraint->target_val);
 }
 
-int	r01_check_constr_violation(t_r01_constraint *constr, int sub_idx)
+int	r01_check_violation(t_r01_constraint *constr, int sub_idx, int size)
 {
 	int		lhs_ub;
 	int		rhs_ub;
@@ -59,9 +61,9 @@ int	r01_check_constr_violation(t_r01_constraint *constr, int sub_idx)
 	if (constr->n_unset == 0 && constr->n_seen > constr->target_val)
 		return (1);
 	lhs_ub = constr->n_seen + constr->n_unset;
-	rhs_ub = constr->size - constr->max_height;
-	if (constr->size - sub_idx - 1 < rhs_ub)
-		rhs_ub = constr->size - sub_idx - 1;
+	rhs_ub = size - constr->max_height;
+	if ( size - sub_idx - 1 < rhs_ub)
+		rhs_ub = size - sub_idx - 1;
 	if (lhs_ub + rhs_ub < constr->target_val)
 		return (1);
 	return (0);

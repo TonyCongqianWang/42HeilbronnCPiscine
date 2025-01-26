@@ -6,7 +6,7 @@
 /*   By: towang <towang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 11:55:53 by towang            #+#    #+#             */
-/*   Updated: 2025/01/26 02:21:37 by towang           ###   ########.fr       */
+/*   Updated: 2025/01/26 02:41:41 by towang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,6 @@
 
 typedef struct s_r01_constraint
 {
-	int		idx;
-	int		size;
 	int		max_height;
 	int		n_seen;
 	int		n_unset;
@@ -42,6 +40,6 @@ void	r01_initialize_puzzle(t_r01_puzzle *puzzle, int size);
 void	r01_set_grid_val(t_r01_puzzle *puzzle, int idx, int val);
 void	r01_update_min_unset(t_r01_puzzle *puzzle, int unset_count);
 int		r01_try_update_valid_values(t_r01_puzzle *puzzle, int idx, int val);
-void	initialize_constraint_indeces(t_r01_constraint *constraint);
+void	init_constr_indeces(t_r01_constraint *constraint, int idx, int size);
 
 #endif
