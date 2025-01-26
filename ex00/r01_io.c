@@ -6,7 +6,7 @@
 /*   By: towang <towang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 11:55:36 by towang            #+#    #+#             */
-/*   Updated: 2025/01/25 20:33:33 by towang           ###   ########.fr       */
+/*   Updated: 2025/01/26 02:24:29 by towang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	parse_input_str(t_r01_puzzle *puzzle, char *str)
 		val = str[2 * counter] - '0';
 		if (val > size)
 			puzzle->is_invalid = 1;
-		puzzle->constr_vals[counter] = val;
+		puzzle->constraints[counter].target_val = val;
 		counter++;
 	}
 }

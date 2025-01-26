@@ -6,7 +6,7 @@
 /*   By: towang <towang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 11:55:53 by towang            #+#    #+#             */
-/*   Updated: 2025/01/26 01:48:25 by towang           ###   ########.fr       */
+/*   Updated: 2025/01/26 02:24:17 by towang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,36 @@ void	r01_initialize_puzzle(t_r01_puzzle *puzzle, int size)
 	idx = 0;
 	while (idx < 4 * size)
 	{
-		puzzle->constr_vals[idx] = 0;
+		puzzle->constraints[idx].size = size;
+		puzzle->constraints[idx].idx = idx;
+		initialize_constraint_indeces(&(puzzle->constraints[idx]));
 		idx++;
+	}
+}
+
+void	initialize_constraint_indeces(t_r01_constraint *constraint)
+{
+	int		sub_index;
+	int		grid_index;
+	int		constr_idx;
+	int		size;
+
+	sub_index = 0;
+	grid_index = 0;
+	constr_idx = constraint->idx;
+	size = constraint->size;
+	while (sub_index < constraint->size)
+	{
+		if (constr_idx < size)
+			grid_index = constr_idx + sub_index * size;
+		else if (constr_idx < 2 * size)
+			grid_index = (constr_idx % size) + (size - sub_index - 1) * size;
+		else if (constr_idx < 3 * size)
+			grid_index = (constr_idx % size) * size + sub_index;
+		else if (constr_idx < size * size)
+			grid_index = ((constr_idx % size) + 1) * size - 1 - sub_index;
+		constraint->grid_indeces[sub_index] = grid_index;
+		sub_index++;
 	}
 }
 

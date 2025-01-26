@@ -6,7 +6,7 @@
 /*   By: towang <towang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 21:31:51 by towang            #+#    #+#             */
-/*   Updated: 2025/01/26 00:54:36 by towang           ###   ########.fr       */
+/*   Updated: 2025/01/26 02:17:13 by towang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,21 +15,17 @@
 void	r01_check_constraints(t_r01_puzzle *puzzle)
 {
 	int					idx;
-	int					sub_idx;
-	t_r01_constraint	constraint;
+	t_r01_constraint	*constr;
 
 	idx = 0;
+	constr = &(puzzle->constraints[idx]);
 	while (idx < 4 * puzzle->size)
 	{
-		constraint.idx = idx;
-		constraint.size = puzzle->size;
-		constraint.target_val = puzzle->constr_vals[idx];
-		constraint.max_height = 0;
-		constraint.n_seen = 0;
-		constraint.n_unset = 0;
-		sub_idx = 0;
-		puzzle->is_invalid = !r01_check_constr(puzzle, &constraint);
-		r01_update_min_unset(puzzle, constraint.n_unset);
+		constr->max_height = 0;
+		constr->n_seen = 0;
+		constr->n_unset = 0;
+		puzzle->is_invalid = !r01_check_constr(puzzle, constr);
+		r01_update_min_unset(puzzle, puzzle->constraints[idx].n_unset);
 		if (puzzle->is_invalid)
 			return ;
 		idx++;
@@ -44,7 +40,7 @@ int	r01_check_constr(t_r01_puzzle *puzzle, t_r01_constraint *constraint)
 	constr_sub_idx = 0;
 	while (constr_sub_idx < constraint->size)
 	{
-		grid_idx = r01_get_grid_idx_for_constr(constraint, constr_sub_idx);
+		grid_idx = constraint->grid_indeces[constr_sub_idx];
 		r01_try_update_constr(puzzle->grid_vals[grid_idx], constraint);
 		if (r01_check_constr_violation(constraint, constr_sub_idx))
 		{
@@ -53,26 +49,6 @@ int	r01_check_constr(t_r01_puzzle *puzzle, t_r01_constraint *constraint)
 		constr_sub_idx++;
 	}
 	return (constraint->n_seen + constraint->n_unset >= constraint->target_val);
-}
-
-int	r01_get_grid_idx_for_constr(t_r01_constraint *constraint, int sub_idx)
-{
-	int		constr_idx;
-	int		size;
-	int		grid_idx;
-
-	constr_idx = constraint->idx;
-	size = constraint->size;
-	grid_idx = -1;
-	if (constr_idx < size)
-		grid_idx = constr_idx + sub_idx * size;
-	else if (constr_idx < 2 * size)
-		grid_idx = (constr_idx % size) + (size - sub_idx - 1) * size;
-	else if (constr_idx < 3 * size)
-		grid_idx = (constr_idx % size) * size + sub_idx;
-	else if (constr_idx < size * size)
-		grid_idx = ((constr_idx % size) + 1) * size - 1 - sub_idx;
-	return (grid_idx);
 }
 
 int	r01_check_constr_violation(t_r01_constraint *constr, int sub_idx)
