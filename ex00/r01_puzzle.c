@@ -6,7 +6,7 @@
 /*   By: towang <towang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 11:55:53 by towang            #+#    #+#             */
-/*   Updated: 2025/01/26 12:27:42 by towang           ###   ########.fr       */
+/*   Updated: 2025/01/26 12:48:25 by towang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 void	r01_initialize_puzzle(t_r01_grid *puzzle, int size)
 {
 	int		idx;
+	int		sub_idx;
 
 	idx = 0;
 	puzzle->size = size;
@@ -28,8 +29,14 @@ void	r01_initialize_puzzle(t_r01_grid *puzzle, int size)
 		puzzle->is_invalid = 0;
 	while (idx < size * size)
 	{
+		sub_idx = 0;
 		puzzle->grid_vals[idx] = 0;
 		puzzle->valid_values[idx] = 0xffff;
+		while (sub_idx < 4)
+		{
+			puzzle->constraints->grid_constr_map[idx][sub_idx] = -1;
+			sub_idx++;
+		}
 		idx++;
 	}
 	idx = 0;
@@ -44,6 +51,7 @@ void	init_constr_indeces(t_r01_constraints *constraints, int idx, int size)
 {
 	int		sub_index;
 	int		grid_index;
+	int		grid_to_constr_idx;
 
 	sub_index = 0;
 	grid_index = 0;
@@ -58,7 +66,10 @@ void	init_constr_indeces(t_r01_constraints *constraints, int idx, int size)
 		else if (idx < size * size)
 			grid_index = ((idx % size) + 1) * size - 1 - sub_index;
 		constraints->constr_grid_map[idx][sub_index] = grid_index;
-		constraints->grid_constr_map[grid_index][sub_index] = idx;
+		grid_to_constr_idx = 0;
+		while (constraints->grid_constr_map[grid_index][grid_to_constr_idx] >= 0)
+			grid_to_constr_idx++;
+		constraints->grid_constr_map[grid_index][grid_to_constr_idx] = idx;
 		sub_index++;
 	}
 }
@@ -105,7 +116,7 @@ void	r01_set_grid_val(t_r01_grid *puzzle, int idx, int val)
 		puzzle->is_invalid = 1;
 		return ;
 	}
-	r01_check_constraints(puzzle);
+	r01_check_constraints(puzzle, idx);
 	idx = 0;
 	puzzle->is_complete = 1;
 	while (idx < puzzle->size * puzzle->size)

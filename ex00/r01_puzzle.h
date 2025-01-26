@@ -6,7 +6,7 @@
 /*   By: towang <towang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 11:55:53 by towang            #+#    #+#             */
-/*   Updated: 2025/01/26 12:21:51 by towang           ###   ########.fr       */
+/*   Updated: 2025/01/26 12:32:51 by towang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,12 @@ typedef struct s_r01_constraints
 {
 	int				size;
 	int				active_idx;
-	int				cur_ub;
-	int				cur_lb;	
+	int				cur_lbounds[2];	
+	int				cur_ubounds[2];
 	int				max_height;
 	int				n_seen;
 	int				n_unset;
 	int				vals[R01_MAX_CONSTR_SIZE];
-	int				complement_indece[R01_MAX_CONSTR_SIZE];
 	int				grid_constr_map[R01_MAX_GRID_SIZE][R01_CONSTRS_PER_VAL];
 	int				constr_grid_map[R01_MAX_CONSTR_SIZE][R01_MAX_SIZE];
 }				t_r01_constraints;

@@ -6,30 +6,30 @@
 /*   By: towang <towang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 21:31:51 by towang            #+#    #+#             */
-/*   Updated: 2025/01/26 12:22:59 by towang           ###   ########.fr       */
+/*   Updated: 2025/01/26 12:34:42 by towang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "r01_constraint.h"
 
-void	r01_check_constraints(t_r01_grid *puzzle)
+void	r01_check_constraints(t_r01_grid *puzzle, int insert_idx)
 {
-	int					idx;
+	int					constr_idx;
 	t_r01_constraints	*constr;
 
-	idx = 0;
+	constr_idx = 0;
 	constr = puzzle->constraints;
-	while (idx < 4 * puzzle->size)
+	while (constr_idx < 4)
 	{
 		constr->max_height = 0;
 		constr->n_seen = 0;
 		constr->n_unset = 0;
-		constr->active_idx = idx;
+		constr->active_idx = constr->grid_constr_map[insert_idx][constr_idx];
 		puzzle->is_invalid = !r01_check_active_constr(puzzle);
 		if (puzzle->is_invalid)
 			return ;
 		r01_update_min_unset(puzzle, puzzle->constraints->n_unset);
-		idx++;
+		constr_idx++;
 	}
 }
 
