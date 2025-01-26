@@ -6,7 +6,7 @@
 /*   By: towang <towang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 21:31:51 by towang            #+#    #+#             */
-/*   Updated: 2025/01/26 14:14:26 by towang           ###   ########.fr       */
+/*   Updated: 2025/01/26 14:16:06 by towang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ void	r01_set_active_constraint(t_r01_constraints *constr, int constr_idx)
 	constr->n_seen = 0;
 	constr->n_unset = 0;
 	constr->last_lb = constr->cur_lb;
-	constr->last_ub = constr->cur_ub;
 	constr->cur_lb = 0;
 	constr->cur_ub = constr->size;
 	constr->active_idx = constr_idx;
