@@ -6,7 +6,7 @@
 /*   By: towang <towang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 21:31:51 by towang            #+#    #+#             */
-/*   Updated: 2025/01/26 13:22:39 by towang           ###   ########.fr       */
+/*   Updated: 2025/01/26 13:39:45 by towang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,9 @@ int	r01_check_active_constr(t_r01_grid *puzzle)
 		r01_update_constr(constr, puzzle->grid_vals[grid_idx]);
 		r01_update_bounds(constr, constr_sub_idx, size);
 		constr_sub_idx++;
-		if(constr->cur_lb > constr->vals[constr_idx] 
-					|| constr->cur_ub < constr->vals[constr_idx])
+		if(constr->cur_lb > constr->vals[constr_idx])
+			return (0);
+		if(constr->cur_ub < constr->vals[constr_idx])
 			return (0);
 	}
 	return (1);
@@ -76,7 +77,7 @@ void	r01_update_bounds(t_r01_constraints *constr, int sub_idx, int size)
 	rhs_ub = size - constr->max_height;
 	if (size - sub_idx - 1 < rhs_ub)
 		rhs_ub = size - sub_idx - 1;
-	if (lhs_ub + rhs_ub < constr->cur_lb)
+	if (lhs_ub + rhs_ub < constr->cur_ub)
 		constr->cur_ub = lhs_ub + rhs_ub;
 }
 
