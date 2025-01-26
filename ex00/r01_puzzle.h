@@ -6,7 +6,7 @@
 /*   By: towang <towang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 11:55:53 by towang            #+#    #+#             */
-/*   Updated: 2025/01/26 12:32:51 by towang           ###   ########.fr       */
+/*   Updated: 2025/01/26 13:01:59 by towang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,10 @@ typedef struct s_r01_grid
 	short				valid_values[R01_MAX_GRID_SIZE];
 }				t_r01_grid;
 
-void	r01_initialize_puzzle(t_r01_grid *puzzle, int size);
-void	init_constr_indeces(t_r01_constraints *constraints, int idx, int size);
-void	r01_update_min_unset(t_r01_grid *puzzle, int unset_count);
-int		r01_try_update_valid_values(t_r01_grid *puzzle, int idx, int val);
-void	r01_set_grid_val(t_r01_grid *puzzle, int idx, int val);
+void	r01_init_puzzle(t_r01_grid *grid, t_r01_constraints *constrs, int size);
+void	r01_init_arrays(t_r01_grid *grid, int size);
+void	r01_init_maps(t_r01_constraints *constrs, int idx, int size);
+int		r01_try_update_valid_values(t_r01_grid *grid, int idx, int val);
+void	r01_set_grid_val(t_r01_grid *grid, int idx, int val);
 
 #endif
