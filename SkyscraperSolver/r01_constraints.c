@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   r01_constraint.c                                   :+:      :+:    :+:   */
+/*   r01_constraints.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: towang <towang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 21:31:51 by towang            #+#    #+#             */
-/*   Updated: 2025/01/27 21:05:54 by towang           ###   ########.fr       */
+/*   Updated: 2025/01/27 21:41:17 by towang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "r01_constraint.h"
+#include "r01_constraints.h"
 
 void	r01_check_constraints(t_r01_grid *puzzle, int insert_idx)
 {

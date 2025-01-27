@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: towang <towang@student.42heilbronn.de>     +#+  +:+       +#+        */
+/*   By: towang <towang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 11:51:38 by towang            #+#    #+#             */
-/*   Updated: 2025/01/26 12:18:25 by towang           ###   ########.fr       */
+/*   Updated: 2025/01/27 21:48:14 by towang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "r01_io.h"
 #include "r01_solver.h"
-#include "r01_puzzle.h"
+#include "r01_structs.h"
 
 int	main(int argc, char **argv)
 {
