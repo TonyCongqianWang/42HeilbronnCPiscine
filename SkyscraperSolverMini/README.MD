@@ -1,6 +1,6 @@
 ### Simpler Solver for the Skyscraper puzzle game
 
-Made during the Rush01 of the C Piscine in 42 Heilbronn. Compile and use as following;
+Made after the weekend as a more simpler and readable version using the same concepts. Compile and use as following;
 
 ```
 cc -Wall -Wextra -Werror -o rush-01 *.c
