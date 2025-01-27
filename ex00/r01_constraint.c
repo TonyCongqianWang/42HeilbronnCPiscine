@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   r01_constraint.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: towang <towang@student.42heilbronn.de>     +#+  +:+       +#+        */
+/*   By: towang <towang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 21:31:51 by towang            #+#    #+#             */
-/*   Updated: 2025/01/26 23:18:46 by towang           ###   ########.fr       */
+/*   Updated: 2025/01/27 21:05:54 by towang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,9 @@ void	r01_check_constraints(t_r01_grid *puzzle, int insert_idx)
 		r01_set_active_constraint(constr, abs_idx);
 		if (rel_idx % 2 == 1)
 		{
-			constr->cur_ub = constr->size + 1 - constr->last_lb;
+			constr->cur_ub = constr->rev_lb;
 			puzzle->is_invalid = !r01_check_active_constr(puzzle);
-			constr->last_ub = constr->size + 1 - constr->cur_lb;
-			puzzle->is_invalid |= constr->last_ub < constr->vals[last_idx];
+			puzzle->is_invalid |= constr->rev_ub < constr->vals[last_idx];
 		}
 		else
 			puzzle->is_invalid = !r01_check_active_constr(puzzle);
@@ -46,7 +45,8 @@ void	r01_set_active_constraint(t_r01_constraints *constr, int constr_idx)
 	constr->max_height = 0;
 	constr->n_seen = 0;
 	constr->n_unset = 0;
-	constr->last_lb = constr->cur_lb;
+	constr->rev_lb = constr->size + 1 - constr->n_seen;
+	constr->rev_ub = constr->cur_ub;
 	constr->cur_lb = 0;
 	constr->cur_ub = constr->size;
 	constr->active_idx = constr_idx;
@@ -68,7 +68,7 @@ int	r01_check_active_constr(t_r01_grid *puzzle)
 	{
 		grid_idx = constr->constr_grid_map[constr_idx][sub_idx];
 		r01_insert_val(constr, puzzle->grid_vals[grid_idx]);
-		r01_update_constr(constr, sub_idx);
+		r01_update_constr_bounds(constr);
 		sub_idx++;
 		if (constr->cur_lb > constr->vals[constr_idx])
 			return (0);
@@ -89,7 +89,7 @@ void	r01_insert_val(t_r01_constraints *constr, int val)
 	}
 }
 
-void	r01_update_constr(t_r01_constraints *constr, int idx)
+void	r01_update_constr_bounds(t_r01_constraints *constr)
 {
 	int		lhs_ub;
 	int		rhs_ub;
@@ -106,8 +106,8 @@ void	r01_update_constr(t_r01_constraints *constr, int idx)
 		constr->cur_lb = new_lb;
 	lhs_ub = constr->n_seen + constr->n_unset;
 	rhs_ub = size - constr->max_height;
-	if (size - idx - 1 < rhs_ub)
-		rhs_ub = size - idx - 1;
 	if (lhs_ub + rhs_ub < constr->cur_ub)
 		constr->cur_ub = lhs_ub + rhs_ub;
+	if (size + 1 - constr->n_seen < constr->rev_ub)
+		constr->rev_ub = size + 1 - constr->n_seen;
 }

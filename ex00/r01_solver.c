@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   r01_solver.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: towang <towang@student.42heilbronn.de>     +#+  +:+       +#+        */
+/*   By: towang <towang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 11:55:42 by towang            #+#    #+#             */
-/*   Updated: 2025/01/26 15:30:38 by towang           ###   ########.fr       */
+/*   Updated: 2025/01/27 20:57:26 by towang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,13 +47,13 @@ int	r01_score_grid_idx(t_r01_grid *puzzle, int idx, int score_depths)
 	int				grid_val;
 	int				num_valid;
 
-	res = *puzzle;
 	grid_val = 1;
 	num_valid = 0;
 	while (grid_val <= puzzle->size)
 	{
 		if (puzzle->valid_values[idx] & (1 << grid_val))
 		{
+			res = *puzzle;
 			r01_set_grid_val(&res, idx, grid_val);
 			if (score_depths != 0)
 				r01_tree_search(&res, score_depths, 0);
@@ -61,11 +61,10 @@ int	r01_score_grid_idx(t_r01_grid *puzzle, int idx, int score_depths)
 				puzzle->valid_values[idx] &= ~(1 << grid_val);
 			else
 				num_valid++;
-			res = *puzzle;
 		}
 		grid_val++;
 	}
-	return (10 * puzzle->size - 3 * num_valid - puzzle->min_unset_count);
+	return (10 * puzzle->size - 3 * num_valid - res.min_unset_count);
 }
 
 int	r01_get_next_grid_idx(t_r01_grid *puzzle, int score_depths)

@@ -6,7 +6,7 @@
 /*   By: towang <towang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 21:31:47 by towang            #+#    #+#             */
-/*   Updated: 2025/01/26 22:30:46 by towang           ###   ########.fr       */
+/*   Updated: 2025/01/27 21:06:03 by towang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,6 @@ void	r01_check_constraints(t_r01_grid *puzzle, int insert_idx);
 void	r01_set_active_constraint(t_r01_constraints *constr, int constr_idx);
 int		r01_check_active_constr(t_r01_grid *puzzle);
 void	r01_insert_val(t_r01_constraints *constr, int val);
-void	r01_update_constr(t_r01_constraints *constr, int idx);
+void	r01_update_constr_bounds(t_r01_constraints *constr);
 
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   r01_puzzle.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: towang <towang@student.42heilbronn.de>     +#+  +:+       +#+        */
+/*   By: towang <towang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 11:55:53 by towang            #+#    #+#             */
-/*   Updated: 2025/01/26 15:15:08 by towang           ###   ########.fr       */
+/*   Updated: 2025/01/27 21:01:31 by towang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ typedef struct s_r01_constraints
 	int				active_idx;
 	int				cur_lb;	
 	int				cur_ub;
-	int				last_lb;
-	int				last_ub;
+	int				rev_lb;
+	int				rev_ub;
 	int				max_height;
 	int				n_seen;
 	int				n_unset;
