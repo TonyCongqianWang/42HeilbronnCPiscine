@@ -6,7 +6,7 @@
 /*   By: towang <towang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 11:55:36 by towang            #+#    #+#             */
-/*   Updated: 2025/01/26 22:31:10 by towang           ###   ########.fr       */
+/*   Updated: 2025/01/27 22:10:09 by towang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	r01_parse_input(t_r01_grid *grid, t_r01_constraints *cons, char *str)
 	while (counter < 4 * size)
 	{
 		val = str[2 * counter] - '0';
-		if (val > size)
+		if (val > size || val < 1)
 			grid->is_invalid = 1;
 		cons->vals[counter] = val;
 		counter++;
