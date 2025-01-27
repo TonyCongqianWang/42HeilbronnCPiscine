@@ -6,7 +6,7 @@
 /*   By: towang <towang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 15:28:12 by towang            #+#    #+#             */
-/*   Updated: 2025/01/27 18:12:11 by towang           ###   ########.fr       */
+/*   Updated: 2025/01/27 18:18:48 by towang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,10 @@ t_r01_grid	r01_tree_search(t_r01_grid *grid, t_r01_constraints *constraints)
 	int				next_y;
 	int				next_val;
 	t_r01_grid		next_grid;
-	
+
 	if (grid->unset_number == 0)
 		return (*grid);
-	if(!r01_get_min_available_coord(grid, &next_x, &next_y))
+	if (!r01_get_min_available_coord(grid, &next_x, &next_y))
 	{
 		grid->is_valid = 0;
 		return (*grid);

@@ -1,13 +1,12 @@
-#include "r01_grid.h"
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   r01_init.c                                         :+:      :+:    :+:   */
+/*   r01_grid.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: towang <towang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 14:04:06 by towang            #+#    #+#             */
-/*   Updated: 2025/01/27 14:04:06 by towang           ###   ########.fr       */
+/*   Updated: 2025/01/27 18:18:24 by towang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +14,8 @@
 
 void	r01_init_grid(t_r01_grid *grid, int size)
 {
-	int x;
-	int y;
+	int		x;
+	int		y;
 
 	grid->size = size;
 	grid->unset_number = size * size;
@@ -68,7 +67,7 @@ int	r01_get_num_valid_values(t_r01_grid *grid, int x, int y)
 	int		res;
 	int		counter;
 	int		bitmap;
-	
+
 	if (grid->grid_vals[x][y] != 0)
 		return (grid->size + 1);
 	res = 0;

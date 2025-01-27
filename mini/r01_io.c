@@ -6,7 +6,7 @@
 /*   By: towang <towang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 11:55:36 by towang            #+#    #+#             */
-/*   Updated: 2025/01/27 16:18:56 by towang           ###   ########.fr       */
+/*   Updated: 2025/01/27 18:17:55 by towang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int	r01_parse_input(t_r01_constraints *cons, char *str)
 	int		val;
 
 	size = r01_parse_input_size(str);
-	if(!size)
+	if (!size)
 		return (0);
 	cons->size = size;
 	group_idx = 0;
