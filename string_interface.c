@@ -6,11 +6,12 @@
 /*   By: towang <towang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 11:55:36 by towang            #+#    #+#             */
-/*   Updated: 2025/01/28 17:40:51 by towang           ###   ########.fr       */
+/*   Updated: 2025/01/28 18:00:32 by towang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "string_interface.h"
+#include "puzzle_init.h"
 
 int	parse_puzzle_size_from_string(char *str)
 {
@@ -45,10 +46,10 @@ int	init_puzzle_from_str(t_puzzle *puzzle, char *str)
 	int		counter;
 	int		val;
 
-	size = r01_parse_input_size(str);
+	size = parse_puzzle_size_from_string(str);
 	if(!size)
 		return 0;
-	r01_init_puzzle(puzzle, size);
+	init_puzzle(puzzle, size);
 	counter = 0;
 	while (counter < 4 * size)
 	{
@@ -61,4 +62,5 @@ int	init_puzzle_from_str(t_puzzle *puzzle, char *str)
 			puzzle->constraint_pairs[counter].bwd_val = val;
 		counter++;
 	}
+	return (1);
 }

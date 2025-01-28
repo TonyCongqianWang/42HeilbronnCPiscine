@@ -6,11 +6,13 @@
 /*   By: towang <towang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 11:55:42 by towang            #+#    #+#             */
-/*   Updated: 2025/01/28 17:44:28 by towang           ###   ########.fr       */
+/*   Updated: 2025/01/28 17:59:48 by towang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "puzzle_solver.h"
+#include "grid_update.h"
+#include "cell_bitmaps.h"
 
 int	solve_puzzle(t_puzzle *puzzle)
 {
@@ -53,7 +55,7 @@ int	score_search_cell_candidate(t_puzzle *puzzle, int idx)
 		if(try_set_grid_val(puzzle, idx, grid_val))
 			num_valid++;
 		else
-			set_value_invalid(puzzle->node_state, idx, grid_val);
+			set_value_invalid(&puzzle->node_state, idx, grid_val);
 		grid_val++;
 	}
 	return (10 * puzzle->size - num_valid);
