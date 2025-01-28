@@ -6,31 +6,34 @@
 /*   By: towang <towang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 11:51:38 by towang            #+#    #+#             */
-/*   Updated: 2025/01/27 21:48:14 by towang           ###   ########.fr       */
+/*   Updated: 2025/01/28 17:49:38 by towang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "r01_io.h"
-#include "r01_solver.h"
-#include "r01_structs.h"
+#include "print_utility.h"
+#include "puzzle_structs.h"
+#include "puzzle_solver.h"
+#include "string_interface.h"
 
 int	main(int argc, char **argv)
 {
-	t_r01_grid			puzzle_grid;
-	t_r01_constraints	puzzle_constraints;
+	t_puzzle puzzle;
 
 	if (argc != 2)
 	{
-		r01_print_error();
-		return (0);
+		print_error("Wrong argument count.");
+		return (-1);
 	}
-	r01_parse_input(&puzzle_grid, &puzzle_constraints, argv[1]);
-	puzzle_grid = r01_solve_puzzle(&puzzle_grid);
-	if (puzzle_grid.is_invalid || !puzzle_grid.is_complete)
+	if (init_puzzle_from_str(&puzzle, argv[1]))
 	{
-		r01_print_error();
+		print_error("Wrong argument format.");
+		return (-2);
+	}
+	if (!solve_puzzle(&puzzle))
+	{
+		print_error("Could not find solution.");
 		return (0);
 	}
-	r01_print_grid(&puzzle_grid);
+	print_solution_grid(&puzzle);
 	return (0);
 }

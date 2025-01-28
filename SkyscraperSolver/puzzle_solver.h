@@ -1,23 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   r01_constraints.h                                  :+:      :+:    :+:   */
+/*   puzzle_solver.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: towang <towang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/25 21:31:47 by towang            #+#    #+#             */
-/*   Updated: 2025/01/27 21:47:40 by towang           ###   ########.fr       */
+/*   Created: 2025/01/25 11:55:46 by towang            #+#    #+#             */
+/*   Updated: 2025/01/28 17:44:18 by towang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef R01_CONSTRAINTS_H
-# define R01_CONSTRAINTS_H
-# include "r01_structs.h"
+#ifndef PUZZLE_SOLVER_H
+# define PUZZLE_SOLVER_H
+# include "puzzle_structs.h"
 
-void	r01_check_constraints(t_r01_grid *puzzle, int insert_idx);
-void	r01_set_active_constraint(t_r01_constraints *constr, int constr_idx);
-int		r01_check_active_constr(t_r01_grid *puzzle);
-void	r01_insert_val(t_r01_constraints *constr, int val);
-void	r01_update_constr_bounds(t_r01_constraints *constr);
+int		solve_puzzle(t_puzzle *puzzle);
+int		tree_search(t_puzzle *puzzle, int depths);
+int		score_search_cell_candidate(t_puzzle *puzzle, int idx);
+int		get_next_tree_search_cell(t_puzzle *puzzle);
 
 #endif
