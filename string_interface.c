@@ -1,19 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   r01_io.c                                           :+:      :+:    :+:   */
+/*   string_interface.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: towang <towang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 11:55:36 by towang            #+#    #+#             */
-/*   Updated: 2025/01/27 22:10:09 by towang           ###   ########.fr       */
+/*   Updated: 2025/01/28 17:40:51 by towang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
-#include "r01_io.h"
+#include "string_interface.h"
 
-int	r01_parse_input_size(char *str)
+int	parse_puzzle_size_from_string(char *str)
 {
 	int		space_expected;
 	int		counter;
@@ -40,48 +39,26 @@ int	r01_parse_input_size(char *str)
 	return (counter / 4);
 }
 
-void	r01_parse_input(t_r01_grid *grid, t_r01_constraints *cons, char *str)
+int	init_puzzle_from_str(t_puzzle *puzzle, char *str)
 {
 	int		size;
 	int		counter;
 	int		val;
 
 	size = r01_parse_input_size(str);
-	r01_init_puzzle(grid, cons, size);
+	if(!size)
+		return 0;
+	r01_init_puzzle(puzzle, size);
 	counter = 0;
 	while (counter < 4 * size)
 	{
 		val = str[2 * counter] - '0';
-		if (val > size || val < 1)
-			grid->is_invalid = 1;
-		cons->vals[counter] = val;
-		counter++;
-	}
-}
-
-void	r01_print_grid(t_r01_grid *grid)
-{
-	int		counter;
-	char	val;
-
-	counter = 0;
-	while (counter < grid->size * grid->size)
-	{
-		val = '0' + grid->grid_vals[counter];
-		write(1, &val, 1);
-		if (counter % grid->size != grid->size - 1)
-		{
-			write(1, " ", 1);
-		}
+		if (val > size)
+			return (0);
+		if ((counter / 4) % 2 == 0)
+			puzzle->constraint_pairs[counter].fwd_val = val;
 		else
-		{
-			write(1, "\n", 1);
-		}
+			puzzle->constraint_pairs[counter].bwd_val = val;
 		counter++;
 	}
-}
-
-void	r01_print_error(void)
-{
-	write(1, "Error\n", 6);
 }
