@@ -6,7 +6,7 @@
 /*   By: towang <towang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 21:31:51 by towang            #+#    #+#             */
-/*   Updated: 2025/01/27 21:41:17 by towang           ###   ########.fr       */
+/*   Updated: 2025/01/28 15:03:32 by towang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	r01_check_constraints(t_r01_grid *puzzle, int insert_idx)
 		{
 			constr->cur_ub = constr->rev_lb;
 			puzzle->is_invalid = !r01_check_active_constr(puzzle);
-			puzzle->is_invalid |= constr->rev_ub < constr->vals[last_idx];
+			puzzle->is_invalid |= (constr->rev_ub < constr->vals[last_idx]);
 		}
 		else
 			puzzle->is_invalid = !r01_check_active_constr(puzzle);
@@ -99,7 +99,7 @@ void	r01_update_constr_bounds(t_r01_constraints *constr)
 
 	size = constr->size;
 	constr_idx = constr->active_idx;
-	new_lb = constr->n_seen > constr->cur_lb;
+	new_lb = constr->n_seen;
 	if (constr->max_height < size)
 		new_lb += 1;
 	if (constr->n_unset == 0 && new_lb > constr->cur_lb)
