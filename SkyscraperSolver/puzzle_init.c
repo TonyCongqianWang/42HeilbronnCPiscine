@@ -6,7 +6,7 @@
 /*   By: towang <towang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 11:55:53 by towang            #+#    #+#             */
-/*   Updated: 2025/01/28 17:34:36 by towang           ###   ########.fr       */
+/*   Updated: 2025/01/28 17:58:50 by towang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,8 @@ void	init_puzzle(t_puzzle *puzzle, int size)
 {
 	int		idx;
 
-	puzzle->size = size;
-	puzzle->nodes_visited = 0;
-	puzzle->node_state.size = size;
-	if (size == 0)
-		puzzle->node_state.is_invalid = 0;
-	r01_init_arrays(puzzle, size);
+	init_state_fields(puzzle, size);
+	init_grid_and_bmps(puzzle, size);
 	idx = 0;
 	while (idx < 2 * size)
 	{
@@ -65,10 +61,15 @@ void	init_constraints(t_puzzle *puzzle, int idx, int size)
 	}
 }
 
-void    init_states(t_node_state *node_state, int size)
+void    init_state_fields(t_puzzle *puzzle, int size)
 {
-	node_state->size = size;
-	node_state->is_complete = 0;
-	node_state->is_invalid = 0;
-	node_state->total_unset_count = size * size;
+	puzzle->size = size;
+	puzzle->nodes_visited = 0;
+	puzzle->node_state.size = size;
+	puzzle->node_state.is_complete = 0;
+	puzzle->node_state.total_unset_count = size * size;
+	if (size == 0)
+		puzzle->node_state.is_invalid = 1;
+	else
+		puzzle->node_state.is_invalid = 0;
 }

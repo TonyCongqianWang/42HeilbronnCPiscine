@@ -6,7 +6,7 @@
 /*   By: towang <towang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 11:51:38 by towang            #+#    #+#             */
-/*   Updated: 2025/01/28 17:49:38 by towang           ###   ########.fr       */
+/*   Updated: 2025/01/28 18:01:40 by towang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	main(int argc, char **argv)
 		print_error("Wrong argument count.");
 		return (-1);
 	}
-	if (init_puzzle_from_str(&puzzle, argv[1]))
+	if (!init_puzzle_from_str(&puzzle, argv[1]))
 	{
 		print_error("Wrong argument format.");
 		return (-2);

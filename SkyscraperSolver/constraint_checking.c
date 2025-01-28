@@ -6,7 +6,7 @@
 /*   By: towang <towang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 21:31:51 by towang            #+#    #+#             */
-/*   Updated: 2025/01/28 16:51:19 by towang           ###   ########.fr       */
+/*   Updated: 2025/01/28 18:00:48 by towang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ int check_active_constr(t_puzzle *puzzle)
 	int					sub_idx;
 	int					grid_idx;
 	int					size;
-	int					constr_idx;
 	t_constraint_state	*constr;
 
 	constr = &puzzle->constr_state;
@@ -41,7 +40,7 @@ int check_active_constr(t_puzzle *puzzle)
 	return (1);
 }
 
-void	reverse_direction(t_constraint_state *constr)
+void	reverse_constr_direction(t_constraint_state *constr)
 {
 	int		swap;
 

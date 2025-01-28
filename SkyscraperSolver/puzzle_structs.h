@@ -6,7 +6,7 @@
 /*   By: towang <towang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 11:55:53 by towang            #+#    #+#             */
-/*   Updated: 2025/01/28 17:31:18 by towang           ###   ########.fr       */
+/*   Updated: 2025/01/28 17:50:55 by towang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,17 +16,6 @@
 # define MAX_CELL_COUNT 81
 # define MAX_SIZE 9
 # define C_PAIRS_PER_CELL 2
-
-typedef struct s_puzzle
-{
-	int						size;
-	int						nodes_visited;
-	t_constraint_pair		constraint_pairs[MAX_N_CONSTR_PAIRS];
-	int						grid_constr_map[MAX_CELL_COUNT][C_PAIRS_PER_CELL];
-	char					grid_vals[MAX_CELL_COUNT];
-	t_node_state			node_state;
-	t_constraint_state		constr_state;
-}				t_puzzle;
 
 typedef struct s_node_state
 {
@@ -57,5 +46,16 @@ typedef struct s_constraint_state
 	int					n_seen;
 	int					n_unset;
 }				t_constraint_state;
+
+typedef struct s_puzzle
+{
+	int						size;
+	int						nodes_visited;
+	t_constraint_pair		constraint_pairs[MAX_N_CONSTR_PAIRS];
+	int						grid_constr_map[MAX_CELL_COUNT][C_PAIRS_PER_CELL];
+	char					grid_vals[MAX_CELL_COUNT];
+	t_node_state			node_state;
+	t_constraint_state		constr_state;
+}				t_puzzle;
 
 #endif
