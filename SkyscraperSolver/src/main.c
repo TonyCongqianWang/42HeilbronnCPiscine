@@ -6,7 +6,7 @@
 /*   By: towang <towang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 11:51:38 by towang            #+#    #+#             */
-/*   Updated: 2025/01/30 21:58:40 by towang           ###   ########.fr       */
+/*   Updated: 2025/01/30 23:34:50 by towang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 #include "puzzle_structs.h"
 #include "puzzle_solver.h"
 #include "string_interface.h"
+
+void	partial_solve_and_print_debug(t_puzzle puzzle, int depths);
 
 int	main(int argc, char **argv)
 {
@@ -30,9 +32,7 @@ int	main(int argc, char **argv)
 		print_error("Wrong argument format.");
 		return (-2);
 	}
-	tree_search(&puzzle, 1);
-	print_score_grid(&puzzle);
-	print_message("");
+	partial_solve_and_print_debug(puzzle, 3);
 	if (!tree_search(&puzzle, -1))
 	{
 		print_error("Could not find solution.");
@@ -46,4 +46,21 @@ int	main(int argc, char **argv)
 	}
 	print_solution_grid(&puzzle, 1);
 	return (0);
+}
+
+void	partial_solve_and_print_debug(t_puzzle puzzle, int depths)
+{
+	int				cell_val;
+
+	tree_search(&puzzle, depths);
+	cell_val = 1;
+	while (cell_val <= puzzle.size)
+	{
+		print_bmp_grid(&puzzle, cell_val, 1);
+		cell_val++;
+	}
+
+	print_score_grid(&puzzle);
+	print_message("");
+	print_solution_grid(&puzzle, 1);
 }
