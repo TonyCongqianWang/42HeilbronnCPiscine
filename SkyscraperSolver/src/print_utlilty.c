@@ -6,15 +6,15 @@
 /*   By: towang <towang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 11:55:36 by towang            #+#    #+#             */
-/*   Updated: 2025/01/30 11:19:51 by towang           ###   ########.fr       */
+/*   Updated: 2025/01/30 21:56:31 by towang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 #include "print_utility.h"
 #include "cell_bitmaps.h"
-
-void	print_solution_grid(t_puzzle *puzzle)
+#include <stdio.h>
+void	print_solution_grid(t_puzzle *puzzle, int print_n_nodes)
 {
 	int		counter;
 	char	val;
@@ -33,6 +33,10 @@ void	print_solution_grid(t_puzzle *puzzle)
 			write(1, "\n", 1);
 		}
 		counter++;
+	}
+	if (print_n_nodes)
+	{
+		printf("Nodes visited %llu\n", puzzle->nodes_visited);
 	}
 }
 
@@ -76,7 +80,7 @@ void	print_score_grid(t_puzzle *puzzle)
 	{
 		print_val = '0' + puzzle->size;
 		cell_val = 1;
-		while (cell_val < puzzle->size)
+		while (cell_val <= puzzle->size)
 		{
 			print_val -= is_valid_value(node_state, cell_idx, cell_val) != 0;
 			cell_val++;

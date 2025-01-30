@@ -6,7 +6,7 @@
 /*   By: towang <towang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 11:51:38 by towang            #+#    #+#             */
-/*   Updated: 2025/01/30 11:19:54 by towang           ###   ########.fr       */
+/*   Updated: 2025/01/30 21:55:56 by towang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,6 @@ int	main(int argc, char **argv)
 	}
 	print_score_grid(&puzzle);
 	print_message("");
-	print_solution_grid(&puzzle);
+	print_solution_grid(&puzzle, 1);
 	return (0);
 }

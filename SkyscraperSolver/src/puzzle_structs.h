@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   puzzle_structs.h                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: towang <towang@student.42.fr>              +#+  +:+       +#+        */
+/*   By: towang <towang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 11:55:53 by towang            #+#    #+#             */
-/*   Updated: 2025/01/28 21:12:03 by towang           ###   ########.fr       */
+/*   Updated: 2025/01/30 18:43:29 by towang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ typedef struct s_constraint_state
 typedef struct s_puzzle
 {
 	int						size;
-	int						nodes_visited;
+	unsigned long long		nodes_visited;
 	t_constraint_pair		constraint_pairs[MAX_N_CONSTR_PAIRS];
 	int						grid_constr_map[MAX_CELL_COUNT][C_PAIRS_PER_CELL];
 	char					grid_vals[MAX_CELL_COUNT];
