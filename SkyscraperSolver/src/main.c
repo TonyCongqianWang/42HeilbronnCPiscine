@@ -6,7 +6,7 @@
 /*   By: towang <towang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 11:51:38 by towang            #+#    #+#             */
-/*   Updated: 2025/01/30 23:52:27 by towang           ###   ########.fr       */
+/*   Updated: 2025/01/30 23:53:00 by towang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ void	partial_solve_and_print_debug(t_puzzle puzzle, int depths);
 int	main(int argc, char **argv)
 {
 	t_puzzle	puzzle;
-	int			cell_val;
 
 	if (argc != 2)
 	{
