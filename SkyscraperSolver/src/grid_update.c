@@ -6,7 +6,7 @@
 /*   By: towang <towang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 11:55:53 by towang            #+#    #+#             */
-/*   Updated: 2025/01/29 19:12:59 by towang           ###   ########.fr       */
+/*   Updated: 2025/01/30 11:50:00 by towang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	unset_grid_val(t_puzzle *grid, int cell_idx)
 {
 	grid->grid_vals[cell_idx] = 0;
 }
-
+#include <stdio.h>
 int	check_constraints(t_puzzle *puzzle, int insert_idx)
 {
 	int					rel_idx;
@@ -58,11 +58,29 @@ int	check_constraints(t_puzzle *puzzle, int insert_idx)
 	{
 		abs_idx = puzzle->grid_constr_map[insert_idx][rel_idx];
 		set_active_constraint(puzzle, abs_idx);
+		if (insert_idx == 55 && puzzle->grid_vals[insert_idx] == 8)
+			printf("GRID0 %d: %d %d %d %d\n", rel_idx, puzzle->constr_state.fwd_ub, 
+			puzzle->constr_state.cur_c_pair.fwd_val, puzzle->constr_state.cur_c_pair.bwd_val, 
+			puzzle->constr_state.max_height_lb);
 		if (!check_active_constr(puzzle))
 			return (0);
+		if (insert_idx == 55 && puzzle->grid_vals[insert_idx] == 8)
+			printf("GRID1 %d: %d %d %d %d\n", rel_idx, puzzle->constr_state.fwd_ub, 
+			puzzle->constr_state.cur_c_pair.fwd_val, puzzle->constr_state.cur_c_pair.bwd_val, 
+			puzzle->constr_state.max_height_lb);
 		reverse_constr_direction(puzzle);
+		if (insert_idx == 55 && puzzle->grid_vals[insert_idx] == 8)
+			printf("GRID2 %d: %d %d %d %d\n", rel_idx, puzzle->constr_state.fwd_ub, 
+			puzzle->constr_state.cur_c_pair.fwd_val, puzzle->constr_state.cur_c_pair.bwd_val, 
+			puzzle->constr_state.max_height_lb);
+			if (insert_idx == 55 && puzzle->grid_vals[insert_idx] == 8)
+			printf("GRID2b %d\n", puzzle->constr_state.is_reverse);
 		if (!check_active_constr(puzzle))
 			return (0);
+		if (insert_idx == 55 && puzzle->grid_vals[insert_idx] == 8)
+			printf("GRID3 %d: %d %d %d %d\n", rel_idx, puzzle->constr_state.fwd_ub, 
+			puzzle->constr_state.cur_c_pair.fwd_val, puzzle->constr_state.cur_c_pair.bwd_val, 
+			puzzle->constr_state.max_height_lb);
 		rel_idx++;
 	}
 	return (1);

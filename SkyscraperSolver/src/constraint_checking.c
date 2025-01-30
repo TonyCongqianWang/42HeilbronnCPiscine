@@ -6,14 +6,14 @@
 /*   By: towang <towang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 21:31:51 by towang            #+#    #+#             */
-/*   Updated: 2025/01/29 23:29:42 by towang           ###   ########.fr       */
+/*   Updated: 2025/01/30 11:55:25 by towang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "constraint_checking.h"
 #include "constraint_selection.h"
 #include "cell_bitmaps.h"
-
+#include <stdio.h>
 int	check_active_constr(t_puzzle *puzzle)
 {
 	int					sub_idx;
@@ -31,7 +31,11 @@ int	check_active_constr(t_puzzle *puzzle)
 		else
 			grid_idx = constr->cur_c_pair.grid_indeces[sub_idx];
 		sub_idx++;
+		if (grid_idx == 55)
+			printf("CONSTR %d: %d %d %d %d %d\n", sub_idx, puzzle->grid_vals[grid_idx], constr->fwd_ub, constr->cur_c_pair.fwd_val, constr->cur_c_pair.bwd_val, constr->max_height_lb);
 		update_constr_state(puzzle, grid_idx);
+		if (grid_idx == 55)
+			printf("CONSTR %d: %d %d %d %d %d\n", sub_idx, puzzle->grid_vals[grid_idx], constr->fwd_ub, constr->cur_c_pair.fwd_val, constr->cur_c_pair.bwd_val, constr->max_height_lb);
 		if (constr->fwd_lb > constr->cur_c_pair.fwd_val
 			|| constr->fwd_ub < constr->cur_c_pair.fwd_val
 			|| constr->bwd_ub < constr->cur_c_pair.bwd_val)
@@ -53,10 +57,10 @@ int	update_constr_state(t_puzzle *puzzle, int grid_idx)
 	{
 		if (constr->max_height_lb == puzzle->size)
 			return (1);
-		new_val_lb = 0;
+		new_val_lb = 1;
 		new_val_ub = puzzle->size;
 		if (constr->max_height_ub == puzzle->size)
-			new_val_lb = puzzle->size;
+			new_val_ub = 0;
 		find_cell_bounds(puzzle, grid_idx, &new_val_lb, &new_val_ub);
 		update_constr_bounds_unset(constr, new_val_lb, new_val_ub);
 		return (1);
@@ -69,7 +73,7 @@ int	update_constr_state(t_puzzle *puzzle, int grid_idx)
 
 void	update_constr_bounds_unset(t_constraint_state *constr, int lb, int ub)
 {
-	if (ub > constr->max_height_lb)
+	if (ub > constr->max_height_lb || ub == 0)
 	{
 		constr->lhs_ub++;
 		if (lb > constr->max_height_ub)
