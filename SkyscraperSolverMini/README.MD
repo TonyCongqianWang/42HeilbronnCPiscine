@@ -1,4 +1,4 @@
-### Simpler Solver for the Skyscraper puzzle game
+## Simpler Solver for the Skyscraper puzzle game
 
 Made after the weekend as a more simpler and readable version using the same concepts. Compile and use as following;
 
