@@ -6,7 +6,7 @@
 /*   By: towang <towang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 16:36:31 by towang            #+#    #+#             */
-/*   Updated: 2025/02/05 15:08:14 by towang           ###   ########.fr       */
+/*   Updated: 2025/02/06 23:46:25 by towang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,16 +42,18 @@ int	try_read_map_from_str(t_map *map, char *str)
 int	try_parse_map_info(t_map *map, char **str)
 {
 	char	*read_pos;
+	char	*map_char_pos;
 
-	read_pos = *str;
+	map_char_pos = *str;
 	map->dims.height = 0;
 	map->dims.width = 0;
-	while (*read_pos >= '0' && *read_pos <= '9')
-		map->dims.height = (10 * map->dims.height) + (*(read_pos++) - '0');
-	if (!map->dims.height)
+	if (!try_parse_map_characters(map, &map_char_pos))
 		return (0);
-	*str = read_pos;
-	return (try_parse_map_characters(map, str));
+	read_pos = *str;
+	while (*read_pos >= '0' && *read_pos <= '9' && read_pos < map_char_pos)
+		map->dims.height = (10 * map->dims.height) + (*(read_pos++) - '0');
+	*str = map_char_pos + 4;
+	return (map->dims.height > 0 && map_char_pos == read_pos);
 }
 
 int	try_parse_map_characters(t_map *map, char **str)
@@ -59,6 +61,12 @@ int	try_parse_map_characters(t_map *map, char **str)
 	char	*read_pos;
 
 	read_pos = *str;
+	while (*read_pos && *read_pos != '\n')
+		read_pos++;
+	if (read_pos - *str < 3 || *read_pos != '\n')
+		return (0);
+	read_pos -= 3;
+	*str = read_pos;
 	if (*(read_pos) >= 32 && *(read_pos) <= 126)
 		map->empty_ch = *(read_pos++);
 	else
@@ -71,9 +79,6 @@ int	try_parse_map_characters(t_map *map, char **str)
 		map->full_ch = *(read_pos++);
 	else
 		return (0);
-	if (*(read_pos++) != '\n')
-		return (0);
-	*str = read_pos;
 	return (map->empty_ch != map->obstacle_ch
 		&& map->obstacle_ch != map->full_ch
 		&& map->full_ch != map->empty_ch);
