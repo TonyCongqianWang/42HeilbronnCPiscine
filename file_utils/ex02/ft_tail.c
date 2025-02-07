@@ -6,7 +6,7 @@
 /*   By: towang <towang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 12:58:04 by towang            #+#    #+#             */
-/*   Updated: 2025/02/06 23:05:28 by towang           ###   ########.fr       */
+/*   Updated: 2025/02/07 01:33:42 by towang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,40 +59,42 @@ int	get_offset_from_argv(int argc, char **argv, unsigned long long *res)
 	return (1);
 }
 
-int	handle_single_file(int argc, char **argv, int arg_idx, int offset)
+void	handle_single_file(char **argv, int arg_idx, int offset, int *flags)
 {
 	int		fd;
 
 	fd = open(argv[arg_idx], O_RDONLY);
 	if (fd != -1)
 	{
-		if (argc > 4)
+		if (*flags & 2)
+			write(1, "\n", 1);
+		if (*flags & 1)
 			write_file_name(argv[arg_idx]);
 		display_file_content(fd, offset);
 		close(fd);
-		return (1);
+		*flags |= 2;
 	}
-	write_file_error(argv[0], argv[arg_idx]);
-	return (0);
+	else
+	{
+		write_file_error(argv[0], argv[arg_idx]);
+	}
 }
 
 int	main(int argc, char **argv)
 {
 	int					arg_idx;
+	int					need_nl_or_fn;
 	unsigned long long	offset;
-	int					need_nl;
 
-	need_nl = 0;
 	if (!get_offset_from_argv(argc, argv, &offset))
 		return (0);
 	if (argc <= 3)
 		display_file_content(0, offset);
+	need_nl_or_fn = argc > 4;
 	arg_idx = 3;
 	while (arg_idx < argc)
 	{
-		if(need_nl)
-			write(1, "\n", 1);
-		need_nl = handle_single_file(argc, argv, arg_idx, offset);
+		handle_single_file(argv, arg_idx, offset, &need_nl_or_fn);
 		arg_idx++;
 	}
 	return (0);

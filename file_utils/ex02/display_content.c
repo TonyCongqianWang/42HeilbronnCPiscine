@@ -6,7 +6,7 @@
 /*   By: towang <towang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 17:18:17 by towang            #+#    #+#             */
-/*   Updated: 2025/02/06 21:40:49 by towang           ###   ########.fr       */
+/*   Updated: 2025/02/07 01:31:17 by towang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ void	display_file_content(int fd, int num_bytes)
 	ssize_t		write_pos;
 	int			wraparound;
 
+	if (!num_bytes)
+		return ;
 	buff = (char *)malloc(num_bytes * sizeof(char));
 	if (!buff)
 		return ;
