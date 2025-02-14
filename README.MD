@@ -1,7 +1,15 @@
 # C PISCINE AT 42 HEILBRONN
 
-Here will be some projects I make during the 4 Week C Piscine at 42 Heilbronn. So far only the Rush01 Solution and a simpler version used for explaining is added. Every project has to satisfy [The Norm](https://github.com/MagicHatJo/-42-Norm/blob/master/norme.en.pdf) to be accepted. Thus there are restrictions like 5 function definitions per file and 5 local variables per function.
+This Repository contains some of the more interesting tasks I solved during the C Pisine at 42 Heibronn. It is my first time creating C projects on my own. Every project has to satisfy [The Norm](https://github.com/42School/norminette) which includes various formatting rules like aligning varliable and function declarations with tabs. Additonally Every function has at most 25 lines and every file has at most 5 function declarations. Every program can be compiled with a standard C compiler. At 42 Heilbronn clang gcc was used and referred to as cc.
 
 ## SkyscraperSolver
 
-So far only a Solver for the Skyscraper Puzzle is available. It supports 1x1 up to 9x9 puzzles. So for only constraint values are support and no grid values.
+This programm uses constraint programming to solve a 1x1 up to 9x9 [Skyscraper puzzle](https://www.brainbashers.com/skyscrapers.asp). Only puzzles with complete constraint values and no grid values can be input as this was the task at the piscine. Support for different puzzles might be added.
+
+## biggest_square
+
+This programm takes file names as arguments or stdin if no file name is given. The files are expected to have a special format, specifying a rectangular map with obstacles. The programm uses dynamic programming to find the biggest possible square that does not cover any obstacles. It prints the map with the biggest possible square filled in.
+
+## file_utils
+
+This subdirectory contains three small programms that display contents of files using only basic C functions.
