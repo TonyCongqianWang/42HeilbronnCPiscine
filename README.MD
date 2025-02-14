@@ -4,12 +4,12 @@ This Repository contains some of the more interesting tasks I solved during the 
 
 ## SkyscraperSolver
 
-This programm uses constraint programming to solve a 1x1 up to 9x9 [Skyscraper puzzle](https://www.brainbashers.com/skyscrapers.asp). Only puzzles with complete constraint values and no grid values can be input as this was the task at the piscine. Support for different puzzles might be added.
+Program that uses constraint programming to solve a 1x1 up to 9x9 [Skyscraper puzzle](https://www.brainbashers.com/skyscrapers.asp). Only puzzles with complete constraint values and no grid values can be input as this was the task at the piscine. Support for different puzzles might be added.
 
 ## biggest_square
 
-This programm takes file names as arguments or stdin if no file name is given. The files are expected to have a special format, specifying a rectangular map with obstacles. The programm uses dynamic programming to find the biggest possible square that does not cover any obstacles. It prints the map with the biggest possible square filled in.
+Program that uses dynamic programming to solve the [Maximal Square](https://leetcode.com/problems/maximal-square/description/) problam. The program takes file names as arguments or stdin if no file name is given. The files are expected to have a special format, specifying a rectangular map with obstacles. It prints the map with the biggest possible square filled in.
 
 ## file_utils
 
-This subdirectory contains three small programms that display contents of files using only basic C functions.
+Three small programs that display contents of files using only basic C functions.
