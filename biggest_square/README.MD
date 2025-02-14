@@ -43,7 +43,7 @@ abb
 222
 ```
  
-Examples of invalid maps:
+Examples of invalid maps (duplicate character in first line; forbidden character in map):
 
 ```
 3122
