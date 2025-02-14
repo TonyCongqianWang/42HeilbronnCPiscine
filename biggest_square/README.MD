@@ -2,7 +2,7 @@
 
 Compile with `make`, the name of the C compiler is expected to be `cc` if your compiler is named differently please change the Makefile.
 
-Programm expects file names as arguments. If no arguments are given, the programm reads from stdin. The input files are expected to be rectangular maps of the following form:
+Program expects file names as arguments. If no arguments are given, the program reads from stdin. The input files are expected to be rectangular maps of the following form:
 
 ```
 <#lines><empty_character><obstacle_character><square_character>
