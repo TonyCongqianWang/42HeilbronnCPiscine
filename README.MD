@@ -1,6 +1,6 @@
 # C PISCINE AT 42 HEILBRONN
 
-This Repository contains some of the more interesting tasks I solved during the C Pisine at 42 Heibronn. It is my first time creating C projects on my own. Every project has to satisfy [The Norm](https://github.com/42School/norminette) which includes various formatting rules like aligning varliable and function declarations with tabs. Additonally Every function has at most 25 lines and every file has at most 5 function declarations. Every program can be compiled with a standard C compiler. At 42 Heilbronn clang gcc was used and referred to as cc.
+This Repository contains some of the more interesting tasks I solved during the C Pisine at [42 Heibronn](https://www.42heilbronn.de/de/). It is my first time creating C projects on my own. Every project has to satisfy [The Norm](https://github.com/42School/norminette) which includes various formatting rules like aligning varliable and function declarations with tabs. Additonally Every function has at most 25 lines and every file has at most 5 function declarations. Every program can be compiled with a standard C compiler. At 42 Heilbronn clang gcc was used and referred to as cc.
 
 ## SkyscraperSolver
 
