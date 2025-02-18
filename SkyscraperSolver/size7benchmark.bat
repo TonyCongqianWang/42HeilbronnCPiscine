@@ -1,10 +1,9 @@
 @echo off
-
 rem taken from https://stackoverflow.com/questions/9922498/calculate-time-difference-in-windows-batch-file
+setlocal
+setlocal EnableDelayedExpansion
 
-for /F "tokens=1-4 delims=:.," %%a in ("%time%") do (
-   set /A "start=(((%%a*60)+1%%b %% 100)*60+1%%c %% 100)*100+1%%d %% 100"
-)
+set "startTime=%time: =0%"
 
 rush-01 "3 1 3 4 2 3 2 1 2 2 2 4 3 3 2 2 4 3 3 3 1 4 1 2 2 3 2 5"
 rush-01 "2 2 4 3 3 3 1 4 1 2 2 3 2 5 3 1 3 4 2 3 2 1 2 2 2 4 3 3"
@@ -169,16 +168,15 @@ rush-01 "2 3 2 4 3 1 3 3 3 3 2 2 2 1 4 1 2 2 3 2 4 2 2 4 3 3 3 1"
 rush-01 "1 3 3 3 4 2 2 4 2 3 2 2 1 4 1 2 2 2 3 3 3 3 1 3 4 2 3 2"
 
 
-for /F "tokens=1-4 delims=:.," %%a in ("%time%") do (
-   set /A "end=(((%%a*60)+1%%b %% 100)*60+1%%c %% 100)*100+1%%d %% 100"
-)
+set "endTime=%time: =0%"
 
-set /A elapsed=end-start
+set "end=!endTime:%time:~8,1%=%%100)*100+1!"  &  set "start=!startTime:%time:~8,1%=%%100)*100+1!"
+set /A "elap=((((10!end:%time:~2,1%=%%100)*60+1!%%100)-((((10!start:%time:~2,1%=%%100)*60+1!%%100), elap-=(elap>>31)*24*60*60*100"
 
-set /A hh=elapsed/(60*60*100), rest=elapsed%%(60*60*100), mm=rest/(60*100), rest%%=60*100, ss=rest/100, cc=rest%%100
-if %mm% lss 10 set mm=0%mm%
-if %ss% lss 10 set ss=0%ss%
-if %cc% lss 10 set cc=0%cc%
-echo %hh%:%mm%:%ss%.%cc%
+set /A "cc=elap%%100+100,elap/=100,ss=elap%%60+100,elap/=60,mm=elap%%60+100,hh=elap/60+100"
+
+echo Start:    %startTime%
+echo End:      %endTime%
+echo Elapsed:  %hh:~1%%time:~2,1%%mm:~1%%time:~2,1%%ss:~1%%time:~8,1%%cc:~1%
 
 endlocal
