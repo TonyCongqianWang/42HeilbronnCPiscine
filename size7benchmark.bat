@@ -1,6 +1,10 @@
 @echo off
-echo Start Time:
-powershell -Command "(Get-Date -Format 'yyyy-MM-dd HH:mm:ss.fff')"
+
+rem taken from https://stackoverflow.com/questions/9922498/calculate-time-difference-in-windows-batch-file
+
+for /F "tokens=1-4 delims=:.," %%a in ("%time%") do (
+   set /A "start=(((%%a*60)+1%%b %% 100)*60+1%%c %% 100)*100+1%%d %% 100"
+)
 
 rush-01 "3 1 3 4 2 3 2 1 2 2 2 4 3 3 2 2 4 3 3 3 1 4 1 2 2 3 2 5"
 rush-01 "2 2 4 3 3 3 1 4 1 2 2 3 2 5 3 1 3 4 2 3 2 1 2 2 2 4 3 3"
@@ -164,10 +168,17 @@ rush-01 "2 2 4 3 3 3 1 4 1 2 2 3 2 4 3 1 3 4 2 3 2 1 2 2 2 3 3 3"
 rush-01 "2 3 2 4 3 1 3 3 3 3 2 2 2 1 4 1 2 2 3 2 4 2 2 4 3 3 3 1"
 rush-01 "1 3 3 3 4 2 2 4 2 3 2 2 1 4 1 2 2 2 3 3 3 3 1 3 4 2 3 2"
 
-echo End Time:
-powershell -Command "(Get-Date -Format 'yyyy-MM-dd HH:mm:ss.fff')"
 
-echo Elapsed Time:
-powershell -Command "Measure-Command {& '%1'}" --% my_command.exe 'or' powershell -Command "Measure-Command {& '%1'}" --% call my_script.bat | findstr /i "TotalSeconds"
+for /F "tokens=1-4 delims=:.," %%a in ("%time%") do (
+   set /A "end=(((%%a*60)+1%%b %% 100)*60+1%%c %% 100)*100+1%%d %% 100"
+)
 
-pause
+set /A elapsed=end-start
+
+set /A hh=elapsed/(60*60*100), rest=elapsed%%(60*60*100), mm=rest/(60*100), rest%%=60*100, ss=rest/100, cc=rest%%100
+if %mm% lss 10 set mm=0%mm%
+if %ss% lss 10 set ss=0%ss%
+if %cc% lss 10 set cc=0%cc%
+echo %hh%:%mm%:%ss%.%cc%
+
+endlocal
