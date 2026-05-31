@@ -1,0 +1,3 @@
+[submodule "SkyscraperSolver"]
+	path = SkyscraperSolver
+	url = https://github.com/TonyCongqianWang/SkyscraperSolver.git
