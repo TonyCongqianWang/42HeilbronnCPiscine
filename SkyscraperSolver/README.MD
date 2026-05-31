@@ -34,6 +34,11 @@ Solutions (if found) are printed like this:
 
 You can find a solver-inspired playable desktop game on my other [repository](https://github.com/TonyCongqianWang/SkyscraperGame) or play online [here](https://www.puzzle-skyscrapers.com/) and [here](https://www.brainbashers.com/skyscrapers.asp).
 
+## Python Z3 Cross-Checking Solver
+A Python-based Skyscraper solver utilizing the Z3 Theorem Prover is located in the [python_solver/](python_solver/) directory. It serves as a high-fidelity mathematical reference model to cross-check the correctness of the C solver's solution counts and cell assignments. 
+
+You can run it by installing the Z3 solver dependency (`pip install -r python_solver/requirements.txt`) and executing the solver scripts within the directory for automated verification.
+
 ### Instances
 
 Some more example inputs of different sizes (more can be found in the benchmark_scripts or generated automatically using the python script):
